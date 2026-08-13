@@ -18,6 +18,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.pdv.controlador.PdvController"
             prefWidth="1280"
             prefHeight="720"
             stylesheets="@../css/pdv.css">
@@ -59,7 +60,8 @@
             <Label text="Caixa: 01"
                    styleClass="informacao-cabecalho"/>
 
-            <Label text="Operador: ---"
+            <Label fx:id="rotuloOperador"
+                   text="Operador: ---"
                    styleClass="informacao-cabecalho"/>
 
         </HBox>

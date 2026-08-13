@@ -1,13 +1,18 @@
 package br.com.pdv.controlador;
 
+import br.com.pdv.aplicacao.SessaoUsuario;
 import br.com.pdv.dominio.Usuario;
 import br.com.pdv.servico.ServicoAutenticacao;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class LoginController {
@@ -60,11 +65,15 @@ public class LoginController {
                 return;
             }
 
+            SessaoUsuario.iniciar(usuario);
+
             exibirAlerta(
                     Alert.AlertType.INFORMATION,
                     "Login realizado",
                     "Bem-vindo(a), " + usuario.getNome() + "!"
             );
+
+            abrirPdv();
 
         } catch (SQLException erro) {
 
@@ -74,6 +83,42 @@ public class LoginController {
                     Alert.AlertType.ERROR,
                     "Erro no sistema",
                     "Não foi possível acessar o banco de dados."
+            );
+        }
+    }
+
+    private void abrirPdv() {
+
+        try {
+
+            FXMLLoader carregador = new FXMLLoader(
+                    getClass().getResource("/fxml/pdv.fxml")
+            );
+
+            Scene cenaPdv = new Scene(
+                    carregador.load()
+            );
+
+            Stage janela = (Stage)
+                    campoUsuario
+                            .getScene()
+                            .getWindow();
+
+            janela.setTitle(
+                    "Le Café | Cafeteria Premium - PDV"
+            );
+
+            janela.setScene(cenaPdv);
+            janela.centerOnScreen();
+
+        } catch (IOException erro) {
+
+            erro.printStackTrace();
+
+            exibirAlerta(
+                    Alert.AlertType.ERROR,
+                    "Erro no sistema",
+                    "Não foi possível abrir o PDV."
             );
         }
     }
