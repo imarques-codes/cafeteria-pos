@@ -13,12 +13,12 @@ public class Main extends Application {
     public void start(Stage janelaPrincipal) throws IOException {
 
         FXMLLoader carregador = new FXMLLoader(
-                Main.class.getResource("/fxml/pdv.fxml")
+                Main.class.getResource("/fxml/login.fxml")
         );
 
         Scene cena = new Scene(carregador.load());
 
-        janelaPrincipal.setTitle("Le Café | Cafeteria Premium - PDV");
+        janelaPrincipal.setTitle("Le Café | Cafeteria Premium - Login");
         janelaPrincipal.setScene(cena);
         janelaPrincipal.show();
     }

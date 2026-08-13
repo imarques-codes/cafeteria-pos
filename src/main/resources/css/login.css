@@ -1,0 +1,116 @@
+.root {
+    -fx-font-family: "Segoe UI";
+}
+
+/* =========================
+   FUNDO DA TELA
+   ========================= */
+
+.tela-login {
+    -fx-background-color: #F7F1EB;
+}
+
+/* =========================
+   CARTÃO CENTRAL
+   ========================= */
+
+.cartao-login {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 32 42 28 42;
+
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+
+    -fx-border-color: #D8C4B7;
+    -fx-border-width: 1;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(60, 25, 25, 0.18),
+            18,
+            0.15,
+            0,
+            5
+    );
+}
+
+/* =========================
+   MARCA LE CAFÉ
+   ========================= */
+
+.nome-cafeteria {
+    -fx-text-fill: #5A1721;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+.subtitulo-cafeteria {
+    -fx-text-fill: #765C55;
+    -fx-font-size: 16px;
+}
+
+/* =========================
+   CAMPOS
+   ========================= */
+
+.rotulo-campo {
+    -fx-text-fill: #4A302B;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.campo-login {
+    -fx-background-color: #FBF7F3;
+
+    -fx-border-color: #CBA9A5;
+    -fx-border-width: 1.5;
+
+    -fx-background-radius: 7;
+    -fx-border-radius: 7;
+
+    -fx-font-size: 15px;
+    -fx-padding: 0 12 0 12;
+}
+
+.campo-login:focused {
+    -fx-border-color: #711F2C;
+    -fx-border-width: 2;
+}
+
+/* =========================
+   BOTÃO ENTRAR
+   ========================= */
+
+.botao-entrar {
+    -fx-background-color: #5A1721;
+    -fx-text-fill: #FFFFFF;
+
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 7;
+
+    -fx-cursor: hand;
+}
+
+.botao-entrar:hover {
+    -fx-background-color: #711F2C;
+}
+
+.botao-entrar:pressed {
+    -fx-background-color: #421018;
+}
+
+/* =========================
+   RODAPÉ
+   ========================= */
+
+.versao-sistema {
+    -fx-text-fill: #8A7770;
+    -fx-font-size: 11px;
+}
+
+.fabricante {
+    -fx-text-fill: #6B5952;
+    -fx-font-size: 11px;
+}
