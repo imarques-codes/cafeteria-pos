@@ -6,43 +6,71 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             prefWidth="1280"
-            prefHeight="720">
+            prefHeight="720"
+            stylesheets="@../css/pdv.css">
 
-    <!-- CABEÇALHO -->
+    <!-- ========================= -->
+    <!-- CABEÇALHO                 -->
+    <!-- ========================= -->
+
     <top>
 
-        <HBox spacing="20"
-              prefHeight="80"
+        <HBox styleClass="cabecalho"
               alignment="CENTER_LEFT">
 
-            <padding>
-                <Insets top="20"
-                        right="20"
-                        bottom="20"
-                        left="20"/>
-            </padding>
+            <ImageView fitHeight="78"
+                       preserveRatio="true">
 
-            <Label text="LOGO"/>
+                <image>
+                    <Image url="@../imagens/logo-le-cafe.png"/>
+                </image>
 
-            <Label text="CAFETERIA - PDV"/>
+            </ImageView>
 
-            <HBox HBox.hgrow="ALWAYS"/>
+            <VBox spacing="2"
+                  alignment="CENTER_LEFT">
 
-            <Label text="Caixa: 01"/>
-            <Label text="Operador: ---"/>
+                <Label text="Le Café"
+                       styleClass="titulo-sistema"/>
+
+                <Label text="Cafeteria Premium"
+                       styleClass="subtitulo-sistema"/>
+
+                <Label text="PDV"
+                       styleClass="identificacao-pdv"/>
+
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label text="Caixa: 01"
+                   styleClass="informacao-cabecalho"/>
+
+            <Label text="Operador: ---"
+                   styleClass="informacao-cabecalho"/>
 
         </HBox>
 
     </top>
 
-    <!-- CONTEÚDO PRINCIPAL -->
+
+    <!-- ========================= -->
+    <!-- CONTEÚDO                  -->
+    <!-- ========================= -->
+
     <center>
 
         <GridPane hgap="10"
@@ -55,84 +83,186 @@
                         left="10"/>
             </padding>
 
-            <!-- PAINEL ESQUERDO -->
+            <columnConstraints>
+
+                <ColumnConstraints prefWidth="310"
+                                   minWidth="310"
+                                   maxWidth="310"/>
+
+                <ColumnConstraints hgrow="ALWAYS"/>
+
+            </columnConstraints>
+
+
+            <!-- ========================= -->
+            <!-- PAINEL ESQUERDO           -->
+            <!-- ========================= -->
+
             <VBox GridPane.columnIndex="0"
-                  spacing="10"
-                  prefWidth="300">
+                  styleClass="painel-lateral"
+                  spacing="12">
 
-                <Label text="LOGOTIPO DO CLIENTE"/>
+                <!-- LOGOTIPO -->
 
-                <Label text="CÓDIGO DE BARRAS"/>
+                <StackPane styleClass="area-logotipo"
+                           prefHeight="230">
 
-                <TextField promptText="Leia ou digite o código"/>
+                    <ImageView fitWidth="250"
+                               fitHeight="210"
+                               preserveRatio="true">
 
-                <Label text="VALOR UNITÁRIO"/>
-                <Label text="R$ 0,00"/>
+                        <image>
+                            <Image url="@../imagens/logo-le-cafe.png"/>
+                        </image>
 
-                <Label text="TOTAL DO ITEM"/>
-                <Label text="R$ 0,00"/>
+                    </ImageView>
 
-                <Label text="ATALHOS"/>
-                <Label text="F2 - Pesquisar produto"/>
-                <Label text="F4 - Quantidade"/>
-                <Label text="F5 - Nova venda"/>
-                <Label text="F10 - Finalizar venda"/>
-                <Label text="ESC - Sair"/>
+                </StackPane>
+
+
+                <!-- CÓDIGO DE BARRAS -->
+
+                <Label text="CÓDIGO DE BARRAS"
+                       styleClass="titulo-atalhos"/>
+
+                <TextField promptText="Leia ou digite o código"
+                           styleClass="campo-codigo"/>
+
+
+                <!-- VALOR UNITÁRIO -->
+
+                <VBox styleClass="painel-valor"
+                      spacing="5">
+
+                    <Label text="VALOR UNITÁRIO"
+                           styleClass="titulo-campo"/>
+
+                    <Label text="R$ 0,00"
+                           styleClass="valor"/>
+
+                </VBox>
+
+
+                <!-- TOTAL DO ITEM -->
+
+                <VBox styleClass="painel-valor"
+                      spacing="5">
+
+                    <Label text="TOTAL DO ITEM"
+                           styleClass="titulo-campo"/>
+
+                    <Label text="R$ 0,00"
+                           styleClass="valor"/>
+
+                </VBox>
+
+
+                <!-- ATALHOS -->
+
+                <Label text="ATALHOS"
+                       styleClass="titulo-atalhos"/>
+
+                <Label text="F2 - Pesquisar produto"
+                       styleClass="atalho"/>
+
+                <Label text="F4 - Quantidade"
+                       styleClass="atalho"/>
+
+                <Label text="F5 - Nova venda"
+                       styleClass="atalho"/>
+
+                <Label text="F10 - Finalizar venda"
+                       styleClass="atalho"/>
+
+                <Label text="ESC - Sair"
+                       styleClass="atalho"/>
 
             </VBox>
 
-            <!-- PAINEL CENTRAL -->
-            <VBox GridPane.columnIndex="1"
-                  spacing="10">
 
-                <Label text="LISTA DE PRODUTOS"/>
+            <!-- ========================= -->
+            <!-- PAINEL DE PRODUTOS        -->
+            <!-- ========================= -->
+
+            <VBox GridPane.columnIndex="1"
+                  GridPane.hgrow="ALWAYS"
+                  styleClass="painel-produtos"
+                  spacing="0">
+
+                <Label text="LISTA DE PRODUTOS"
+                       styleClass="titulo-painel"
+                       maxWidth="Infinity"/>
 
                 <TableView VBox.vgrow="ALWAYS">
 
                     <columns>
 
                         <TableColumn text="Item"
-                                     prefWidth="60"/>
+                                     prefWidth="70"/>
 
                         <TableColumn text="Código"
-                                     prefWidth="130"/>
+                                     prefWidth="140"/>
 
                         <TableColumn text="Descrição"
-                                     prefWidth="320"/>
+                                     prefWidth="380"/>
 
                         <TableColumn text="Qtd"
-                                     prefWidth="80"/>
+                                     prefWidth="90"/>
 
                         <TableColumn text="Vlr. Unit."
-                                     prefWidth="120"/>
+                                     prefWidth="130"/>
 
                         <TableColumn text="Total"
-                                     prefWidth="120"/>
+                                     prefWidth="130"/>
 
                     </columns>
 
                 </TableView>
 
-                <HBox spacing="20">
 
-                    <Label text="SUBTOTAL"/>
+                <!-- SUBTOTAL -->
 
-                    <HBox HBox.hgrow="ALWAYS"/>
+                <HBox styleClass="painel-subtotal"
+                      alignment="CENTER_LEFT">
 
-                    <Label text="R$ 0,00"/>
+                    <Label text="SUBTOTAL"
+                           styleClass="titulo-total"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Label text="R$ 0,00"
+                           styleClass="valor-subtotal"/>
 
                 </HBox>
 
-                <HBox spacing="30">
 
-                    <VBox HBox.hgrow="ALWAYS">
-                        <Label text="TOTAL RECEBIDO"/>
-                        <Label text="R$ 0,00"/>
+                <!-- RECEBIDO / TROCO -->
+
+                <HBox spacing="10">
+
+                    <VBox HBox.hgrow="ALWAYS"
+                          maxWidth="Infinity"
+                          styleClass="painel-total-menor">
+
+                        <Label text="TOTAL RECEBIDO"
+                               styleClass="titulo-total-menor"/>
+
+                        <Label text="R$ 0,00"
+                               styleClass="valor-total-menor"/>
+
                     </VBox>
 
-                    <VBox HBox.hgrow="ALWAYS">
-                        <Label text="TROCO"/>
-                        <Label text="R$ 0,00"/>
+
+                    <VBox HBox.hgrow="ALWAYS"
+                          maxWidth="Infinity"
+                          styleClass="painel-total-menor">
+
+                        <Label text="TROCO"
+                               styleClass="titulo-total-menor"/>
+
+                        <Label text="R$ 0,00"
+                               styleClass="valor-total-menor"/>
+
                     </VBox>
 
                 </HBox>
