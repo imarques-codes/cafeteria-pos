@@ -1,15 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            prefWidth="1200"
-            prefHeight="700">
+            prefWidth="1280"
+            prefHeight="720">
 
+    <!-- CABEÇALHO -->
+    <top>
+
+        <HBox spacing="20"
+              prefHeight="80"
+              alignment="CENTER_LEFT">
+
+            <padding>
+                <Insets top="20"
+                        right="20"
+                        bottom="20"
+                        left="20"/>
+            </padding>
+
+            <Label text="LOGO"/>
+
+            <Label text="CAFETERIA - PDV"/>
+
+            <HBox HBox.hgrow="ALWAYS"/>
+
+            <Label text="Caixa: 01"/>
+            <Label text="Operador: ---"/>
+
+        </HBox>
+
+    </top>
+
+    <!-- CONTEÚDO PRINCIPAL -->
     <center>
-        <Label text="PDV Cafeteria"/>
+
+        <GridPane hgap="10"
+                  vgap="10">
+
+            <padding>
+                <Insets top="10"
+                        right="10"
+                        bottom="10"
+                        left="10"/>
+            </padding>
+
+            <!-- PAINEL ESQUERDO -->
+            <VBox GridPane.columnIndex="0"
+                  spacing="10"
+                  prefWidth="300">
+
+                <Label text="LOGOTIPO DO CLIENTE"/>
+
+                <Label text="CÓDIGO DE BARRAS"/>
+
+                <TextField promptText="Leia ou digite o código"/>
+
+                <Label text="VALOR UNITÁRIO"/>
+                <Label text="R$ 0,00"/>
+
+                <Label text="TOTAL DO ITEM"/>
+                <Label text="R$ 0,00"/>
+
+                <Label text="ATALHOS"/>
+                <Label text="F2 - Pesquisar produto"/>
+                <Label text="F4 - Quantidade"/>
+                <Label text="F5 - Nova venda"/>
+                <Label text="F10 - Finalizar venda"/>
+                <Label text="ESC - Sair"/>
+
+            </VBox>
+
+            <!-- PAINEL CENTRAL -->
+            <VBox GridPane.columnIndex="1"
+                  spacing="10">
+
+                <Label text="LISTA DE PRODUTOS"/>
+
+                <TableView VBox.vgrow="ALWAYS">
+
+                    <columns>
+
+                        <TableColumn text="Item"
+                                     prefWidth="60"/>
+
+                        <TableColumn text="Código"
+                                     prefWidth="130"/>
+
+                        <TableColumn text="Descrição"
+                                     prefWidth="320"/>
+
+                        <TableColumn text="Qtd"
+                                     prefWidth="80"/>
+
+                        <TableColumn text="Vlr. Unit."
+                                     prefWidth="120"/>
+
+                        <TableColumn text="Total"
+                                     prefWidth="120"/>
+
+                    </columns>
+
+                </TableView>
+
+                <HBox spacing="20">
+
+                    <Label text="SUBTOTAL"/>
+
+                    <HBox HBox.hgrow="ALWAYS"/>
+
+                    <Label text="R$ 0,00"/>
+
+                </HBox>
+
+                <HBox spacing="30">
+
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="TOTAL RECEBIDO"/>
+                        <Label text="R$ 0,00"/>
+                    </VBox>
+
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="TROCO"/>
+                        <Label text="R$ 0,00"/>
+                    </VBox>
+
+                </HBox>
+
+            </VBox>
+
+        </GridPane>
+
     </center>
 
 </BorderPane>
