@@ -3,6 +3,7 @@ package br.com.pdv.infraestrutura;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ConexaoBanco {
 
@@ -10,6 +11,14 @@ public class ConexaoBanco {
             "jdbc:sqlite:pdv-cafeteria.db";
 
     public static Connection conectar() throws SQLException {
-        return DriverManager.getConnection(URL);
+
+        Connection conexao =
+                DriverManager.getConnection(URL);
+
+        try (Statement comando = conexao.createStatement()) {
+            comando.execute("PRAGMA foreign_keys = ON;");
+        }
+
+        return conexao;
     }
 }
