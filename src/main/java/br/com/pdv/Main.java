@@ -1,21 +1,22 @@
 package br.com.pdv;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage janelaPrincipal) {
+    public void start(Stage janelaPrincipal) throws IOException {
 
-        Label mensagem = new Label("PDV Cafeteria iniciado corretamente!");
+        FXMLLoader carregador = new FXMLLoader(
+                Main.class.getResource("/fxml/pdv.fxml")
+        );
 
-        StackPane painelPrincipal = new StackPane(mensagem);
-
-        Scene cena = new Scene(painelPrincipal, 600, 400);
+        Scene cena = new Scene(carregador.load());
 
         janelaPrincipal.setTitle("PDV Cafeteria");
         janelaPrincipal.setScene(cena);
