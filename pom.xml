@@ -21,18 +21,31 @@
 
     <dependencies>
 
-        <!-- Componentes gráficos do JavaFX -->
+        <!-- JavaFX -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
         </dependency>
 
-        <!-- Arquivos FXML -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>${javafx.version}</version>
+        </dependency>
+
+        <!-- SQLite -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.53.2.1</version>
+        </dependency>
+
+        <!-- Segurança de senhas -->
+        <dependency>
+            <groupId>com.password4j</groupId>
+            <artifactId>password4j</artifactId>
+            <version>1.8.4</version>
         </dependency>
 
     </dependencies>
@@ -49,7 +62,6 @@
                 <configuration>
                     <mainClass>br.com.pdv.Main</mainClass>
                 </configuration>
-
             </plugin>
 
         </plugins>

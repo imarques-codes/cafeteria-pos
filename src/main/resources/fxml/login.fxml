@@ -14,6 +14,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.pdv.controlador.LoginController"
             prefWidth="900"
             prefHeight="600"
             styleClass="tela-login"
@@ -59,24 +60,24 @@
                    maxWidth="Infinity"
                    styleClass="rotulo-campo"/>
 
-            <TextField promptText="Digite seu usuário"
+            <TextField fx:id="campoUsuario"
+                       promptText="Digite seu usuário"
                        prefHeight="42"
                        styleClass="campo-login"/>
 
             <!-- SENHA -->
 
-            <Label text="Senha"
-                   maxWidth="Infinity"
-                   styleClass="rotulo-campo"/>
-
-            <PasswordField promptText="Digite sua senha"
+            <PasswordField fx:id="campoSenha"
+                           promptText="Digite sua senha"
                            prefHeight="42"
                            styleClass="campo-login"/>
 
             <Button text="ENTRAR"
                     prefHeight="44"
                     maxWidth="Infinity"
-                    styleClass="botao-entrar"/>
+                    styleClass="botao-entrar"
+                    onAction="#aoEntrar"/>
+
 
             <Region prefHeight="20"/>
 
