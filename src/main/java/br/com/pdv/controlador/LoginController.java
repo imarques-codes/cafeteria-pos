@@ -1,8 +1,10 @@
 package br.com.pdv.controlador;
 
 import br.com.pdv.aplicacao.SessaoUsuario;
+import br.com.pdv.dominio.SessaoCaixa;
 import br.com.pdv.dominio.Usuario;
 import br.com.pdv.servico.ServicoAutenticacao;
+import br.com.pdv.servico.ServicoCaixa;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +27,9 @@ public class LoginController {
 
     private final ServicoAutenticacao servicoAutenticacao =
             new ServicoAutenticacao();
+
+    private final ServicoCaixa servicoCaixa =
+            new ServicoCaixa();
 
     @FXML
     private void aoEntrar() {
@@ -73,7 +78,19 @@ public class LoginController {
                     "Bem-vindo(a), " + usuario.getNome() + "!"
             );
 
-            abrirAberturaCaixa();
+            SessaoCaixa sessaoAberta =
+                    servicoCaixa.buscarSessaoAberta(
+                            "01"
+                    );
+
+            if (sessaoAberta != null) {
+
+                abrirPdv();
+
+            } else {
+
+                abrirAberturaCaixa();
+            }
 
         } catch (SQLException erro) {
 
@@ -91,20 +108,23 @@ public class LoginController {
 
         try {
 
-            FXMLLoader carregador = new FXMLLoader(
-                    getClass().getResource(
-                            "/fxml/abertura-caixa.fxml"
-                    )
-            );
+            FXMLLoader carregador =
+                    new FXMLLoader(
+                            getClass().getResource(
+                                    "/fxml/abertura-caixa.fxml"
+                            )
+                    );
 
-            Scene cenaAbertura = new Scene(
-                    carregador.load()
-            );
+            Scene cenaAbertura =
+                    new Scene(
+                            carregador.load()
+                    );
 
-            Stage janela = (Stage)
-                    campoUsuario
-                            .getScene()
-                            .getWindow();
+            Stage janela =
+                    (Stage)
+                            campoUsuario
+                                    .getScene()
+                                    .getWindow();
 
             janela.setTitle(
                     "Le Café | Cafeteria Premium - Abertura de Caixa"
@@ -125,6 +145,47 @@ public class LoginController {
         }
     }
 
+    private void abrirPdv() {
+
+        try {
+
+            FXMLLoader carregador =
+                    new FXMLLoader(
+                            getClass().getResource(
+                                    "/fxml/pdv.fxml"
+                            )
+                    );
+
+            Scene cenaPdv =
+                    new Scene(
+                            carregador.load()
+                    );
+
+            Stage janela =
+                    (Stage)
+                            campoUsuario
+                                    .getScene()
+                                    .getWindow();
+
+            janela.setTitle(
+                    "Le Café | Cafeteria Premium - PDV"
+            );
+
+            janela.setScene(cenaPdv);
+            janela.centerOnScreen();
+
+        } catch (IOException erro) {
+
+            erro.printStackTrace();
+
+            exibirAlerta(
+                    Alert.AlertType.ERROR,
+                    "Erro no sistema",
+                    "Não foi possível abrir o PDV."
+            );
+        }
+    }
+
     private void exibirAlerta(
             Alert.AlertType tipo,
             String titulo,
@@ -133,7 +194,10 @@ public class LoginController {
 
         Alert alerta = new Alert(tipo);
 
-        alerta.setTitle("Le Café | PDV");
+        alerta.setTitle(
+                "Le Café | PDV"
+        );
+
         alerta.setHeaderText(titulo);
         alerta.setContentText(mensagem);
 
