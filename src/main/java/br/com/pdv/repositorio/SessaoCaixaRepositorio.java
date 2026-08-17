@@ -117,4 +117,48 @@ public class SessaoCaixaRepositorio {
             comando.executeUpdate();
         }
     }
+    public boolean fecharSessao(
+            int sessaoId,
+            int usuarioFechamentoId,
+            long saldoFinalCentavos
+    ) throws SQLException {
+
+        String sql = """
+            UPDATE sessao_caixa
+            SET
+                usuario_fechamento_id = ?,
+                data_hora_fechamento = CURRENT_TIMESTAMP,
+                saldo_final_centavos = ?,
+                status = 'FECHADO'
+            WHERE id = ?
+              AND status = 'ABERTO';
+            """;
+
+        try (
+                Connection conexao = ConexaoBanco.conectar();
+                PreparedStatement comando = conexao.prepareStatement(sql)
+        ) {
+
+            comando.setInt(
+                    1,
+                    usuarioFechamentoId
+            );
+
+            comando.setLong(
+                    2,
+                    saldoFinalCentavos
+            );
+
+            comando.setInt(
+                    3,
+                    sessaoId
+            );
+
+            int linhasAlteradas =
+                    comando.executeUpdate();
+
+            return linhasAlteradas == 1;
+        }
+    }
+
 }

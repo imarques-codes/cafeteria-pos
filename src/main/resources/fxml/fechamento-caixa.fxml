@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.pdv.controlador.FechamentoCaixaController"
+            prefWidth="620"
+            prefHeight="520"
+            stylesheets="@../css/fechamento-caixa.css"
+            styleClass="tela-fechamento">
+
+    <center>
+
+        <VBox alignment="CENTER"
+              spacing="18"
+              maxWidth="430">
+
+            <padding>
+                <Insets top="30"
+                        right="35"
+                        bottom="30"
+                        left="35"/>
+            </padding>
+
+            <ImageView fitWidth="130"
+                       fitHeight="100"
+                       preserveRatio="true"
+                       smooth="true">
+
+                <image>
+                    <Image url="@../imagens/logo-le-cafe.png"/>
+                </image>
+
+            </ImageView>
+
+            <Label text="FECHAMENTO DE CAIXA"
+                   styleClass="titulo-fechamento"/>
+
+            <Label text="Informe o valor total disponível no caixa antes de encerrar."
+                   wrapText="true"
+                   styleClass="subtitulo-fechamento"/>
+
+            <VBox spacing="6"
+                  maxWidth="360">
+
+                <Label text="Operador"
+                       styleClass="rotulo-campo"/>
+
+                <Label fx:id="rotuloOperador"
+                       text="Administrador Le Café"
+                       styleClass="informacao-operador"/>
+
+            </VBox>
+
+            <VBox spacing="6"
+                  maxWidth="360">
+
+                <Label text="Caixa"
+                       styleClass="rotulo-campo"/>
+
+                <Label fx:id="rotuloCaixa"
+                       text="01 - Caixa principal"
+                       styleClass="informacao-caixa"/>
+
+            </VBox>
+
+            <VBox spacing="6"
+                  maxWidth="360">
+
+                <Label text="Saldo final"
+                       styleClass="rotulo-campo"/>
+
+                <TextField fx:id="campoSaldoFinal"
+                           promptText="R$ 0,00"
+                           prefHeight="46"
+                           styleClass="campo-saldo"/>
+
+            </VBox>
+
+            <Button fx:id="botaoFecharCaixa"
+                    text="FECHAR CAIXA"
+                    prefHeight="48"
+                    maxWidth="360"
+                    defaultButton="true"
+                    styleClass="botao-fechar"
+                    onAction="#aoFecharCaixa"/>
+
+            <Label text="Le Café | Cafeteria Premium"
+                   styleClass="rodape"/>
+
+        </VBox>
+
+    </center>
+
+</BorderPane>

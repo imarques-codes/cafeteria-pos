@@ -109,4 +109,60 @@ public class ServicoCaixa {
                         caixa.getId()
                 );
     }
+    public void fecharCaixa(
+            String codigoCaixa,
+            long saldoFinalCentavos
+    ) throws SQLException {
+
+        Usuario usuarioLogado =
+                SessaoUsuario.getUsuarioLogado();
+
+        if (usuarioLogado == null) {
+            throw new IllegalStateException(
+                    "Nenhum usuário está autenticado."
+            );
+        }
+
+        if (saldoFinalCentavos < 0) {
+            throw new IllegalArgumentException(
+                    "O saldo final não pode ser negativo."
+            );
+        }
+
+        Caixa caixa =
+                caixaRepositorio.buscarPorCodigo(
+                        codigoCaixa
+                );
+
+        if (caixa == null) {
+            throw new IllegalStateException(
+                    "Caixa não encontrado."
+            );
+        }
+
+        SessaoCaixa sessaoAberta =
+                sessaoCaixaRepositorio
+                        .buscarSessaoAbertaPorCaixa(
+                                caixa.getId()
+                        );
+
+        if (sessaoAberta == null) {
+            throw new IllegalStateException(
+                    "Não existe sessão aberta para este caixa."
+            );
+        }
+
+        boolean fechado =
+                sessaoCaixaRepositorio.fecharSessao(
+                        sessaoAberta.getId(),
+                        usuarioLogado.getId(),
+                        saldoFinalCentavos
+                );
+
+        if (!fechado) {
+            throw new IllegalStateException(
+                    "Não foi possível fechar o caixa."
+            );
+        }
+    }
 }
