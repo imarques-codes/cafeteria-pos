@@ -73,7 +73,7 @@ public class LoginController {
                     "Bem-vindo(a), " + usuario.getNome() + "!"
             );
 
-            abrirPdv();
+            abrirAberturaCaixa();
 
         } catch (SQLException erro) {
 
@@ -87,15 +87,17 @@ public class LoginController {
         }
     }
 
-    private void abrirPdv() {
+    private void abrirAberturaCaixa() {
 
         try {
 
             FXMLLoader carregador = new FXMLLoader(
-                    getClass().getResource("/fxml/pdv.fxml")
+                    getClass().getResource(
+                            "/fxml/abertura-caixa.fxml"
+                    )
             );
 
-            Scene cenaPdv = new Scene(
+            Scene cenaAbertura = new Scene(
                     carregador.load()
             );
 
@@ -105,10 +107,10 @@ public class LoginController {
                             .getWindow();
 
             janela.setTitle(
-                    "Le Café | Cafeteria Premium - PDV"
+                    "Le Café | Cafeteria Premium - Abertura de Caixa"
             );
 
-            janela.setScene(cenaPdv);
+            janela.setScene(cenaAbertura);
             janela.centerOnScreen();
 
         } catch (IOException erro) {
@@ -118,7 +120,7 @@ public class LoginController {
             exibirAlerta(
                     Alert.AlertType.ERROR,
                     "Erro no sistema",
-                    "Não foi possível abrir o PDV."
+                    "Não foi possível abrir a tela de abertura de caixa."
             );
         }
     }

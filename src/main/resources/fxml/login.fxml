@@ -68,15 +68,17 @@
             <!-- SENHA -->
 
             <PasswordField fx:id="campoSenha"
-                           promptText="Digite sua senha"
-                           prefHeight="42"
-                           styleClass="campo-login"/>
+                            promptText="Digite sua senha"
+                            prefHeight="42"
+                            styleClass="campo-login"
+                            onAction="#aoEntrar"/>
 
             <Button text="ENTRAR"
                     prefHeight="44"
                     maxWidth="Infinity"
                     styleClass="botao-entrar"
-                    onAction="#aoEntrar"/>
+                    onAction="#aoEntrar"
+                    defaultButton="true"/>
 
 
             <Region prefHeight="20"/>
