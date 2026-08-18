@@ -203,26 +203,33 @@
                        styleClass="titulo-painel"
                        maxWidth="Infinity"/>
 
-                <TableView VBox.vgrow="ALWAYS">
+                <TableView fx:id="tabelaItens"
+                           VBox.vgrow="ALWAYS">
 
                     <columns>
 
-                        <TableColumn text="Item"
+                        <TableColumn fx:id="colunaItem"
+                                     text="Item"
                                      prefWidth="70"/>
 
-                        <TableColumn text="Código"
+                        <TableColumn fx:id="colunaCodigo"
+                                     text="Código"
                                      prefWidth="140"/>
 
-                        <TableColumn text="Descrição"
+                        <TableColumn fx:id="colunaDescricao"
+                                     text="Descrição"
                                      prefWidth="380"/>
 
-                        <TableColumn text="Qtd"
+                        <TableColumn fx:id="colunaQuantidade"
+                                     text="Qtd"
                                      prefWidth="90"/>
 
-                        <TableColumn text="Vlr. Unit."
+                        <TableColumn fx:id="colunaValorUnitario"
+                                     text="Vlr. Unit."
                                      prefWidth="130"/>
 
-                        <TableColumn text="Total"
+                        <TableColumn fx:id="colunaTotal"
+                                     text="Total"
                                      prefWidth="130"/>
 
                     </columns>

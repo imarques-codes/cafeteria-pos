@@ -1,14 +1,21 @@
 package br.com.pdv.controlador;
 
 import br.com.pdv.aplicacao.SessaoUsuario;
+import br.com.pdv.dominio.ItemVenda;
 import br.com.pdv.dominio.Produto;
 import br.com.pdv.repositorio.ProdutoRepositorio;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -26,8 +33,32 @@ public class PdvController {
     @FXML
     private Label rotuloValorUnitario;
 
+    @FXML
+    private TableView<ItemVenda> tabelaItens;
+
+    @FXML
+    private TableColumn<ItemVenda, Number> colunaItem;
+
+    @FXML
+    private TableColumn<ItemVenda, String> colunaCodigo;
+
+    @FXML
+    private TableColumn<ItemVenda, String> colunaDescricao;
+
+    @FXML
+    private TableColumn<ItemVenda, Number> colunaQuantidade;
+
+    @FXML
+    private TableColumn<ItemVenda, String> colunaValorUnitario;
+
+    @FXML
+    private TableColumn<ItemVenda, String> colunaTotal;
+
     private final ProdutoRepositorio produtoRepositorio =
             new ProdutoRepositorio();
+
+    private final ObservableList<ItemVenda> itensVenda =
+            FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -45,7 +76,68 @@ public class PdvController {
             );
         }
 
+        configurarTabela();
+
+        tabelaItens.setItems(itensVenda);
+
         campoCodigo.requestFocus();
+    }
+
+    private void configurarTabela() {
+
+        colunaItem.setCellValueFactory(
+                dados -> new SimpleIntegerProperty(
+                        itensVenda.indexOf(
+                                dados.getValue()
+                        ) + 1
+                )
+        );
+
+        colunaCodigo.setCellValueFactory(
+                dados -> new SimpleStringProperty(
+                        dados
+                                .getValue()
+                                .getProduto()
+                                .getCodigoBarras()
+                )
+        );
+
+        colunaDescricao.setCellValueFactory(
+                dados -> new SimpleStringProperty(
+                        dados
+                                .getValue()
+                                .getProduto()
+                                .getNome()
+                )
+        );
+
+        colunaQuantidade.setCellValueFactory(
+                dados -> new SimpleIntegerProperty(
+                        dados
+                                .getValue()
+                                .getQuantidade()
+                )
+        );
+
+        colunaValorUnitario.setCellValueFactory(
+                dados -> new SimpleStringProperty(
+                        formatarValor(
+                                dados
+                                        .getValue()
+                                        .getPrecoUnitarioCentavos()
+                        )
+                )
+        );
+
+        colunaTotal.setCellValueFactory(
+                dados -> new SimpleStringProperty(
+                        formatarValor(
+                                dados
+                                        .getValue()
+                                        .getTotalCentavos()
+                        )
+                )
+        );
     }
 
     @FXML
@@ -91,6 +183,10 @@ public class PdvController {
                     )
             );
 
+            adicionarProdutoNaVenda(
+                    produto
+            );
+
             campoCodigo.clear();
             campoCodigo.requestFocus();
 
@@ -104,6 +200,39 @@ public class PdvController {
                     "Não foi possível consultar o produto."
             );
         }
+    }
+
+    private void adicionarProdutoNaVenda(
+            Produto produto
+    ) {
+
+        for (ItemVenda item : itensVenda) {
+
+            if (
+                    item.getProduto().getId()
+                            == produto.getId()
+            ) {
+
+                item.setQuantidade(
+                        item.getQuantidade() + 1
+                );
+
+                tabelaItens.refresh();
+
+                return;
+            }
+        }
+
+        ItemVenda novoItem =
+                new ItemVenda(
+                        produto,
+                        1,
+                        produto.getPrecoCentavos()
+                );
+
+        itensVenda.add(
+                novoItem
+        );
     }
 
     @FXML
