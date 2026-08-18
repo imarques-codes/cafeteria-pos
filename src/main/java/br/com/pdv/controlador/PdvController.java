@@ -5,6 +5,7 @@ import br.com.pdv.dominio.ItemVenda;
 import br.com.pdv.dominio.Produto;
 import br.com.pdv.repositorio.ProdutoRepositorio;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -17,6 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -87,6 +91,24 @@ public class PdvController {
         tabelaItens.setItems(itensVenda);
 
         campoCodigo.requestFocus();
+
+        Platform.runLater(() -> {
+
+            campoCodigo
+                    .getScene()
+                    .addEventFilter(
+                            KeyEvent.KEY_PRESSED,
+                            evento -> {
+
+                                if (evento.getCode() == KeyCode.F4) {
+
+                                    evento.consume();
+
+                                    aoAlterarQuantidade();
+                                }
+                            }
+                    );
+        });
     }
 
     private void configurarTabela() {
@@ -266,6 +288,100 @@ public class PdvController {
                 formatarValor(
                         subtotalCentavos
                 )
+        );
+    }
+
+    private void aoAlterarQuantidade() {
+
+        ItemVenda itemSelecionado =
+                tabelaItens
+                        .getSelectionModel()
+                        .getSelectedItem();
+
+        if (itemSelecionado == null) {
+
+            exibirAlerta(
+                    Alert.AlertType.WARNING,
+                    "Item não selecionado",
+                    "Selecione um produto na tabela antes de alterar a quantidade."
+            );
+
+            return;
+        }
+
+        TextInputDialog dialogo =
+                new TextInputDialog(
+                        String.valueOf(
+                                itemSelecionado.getQuantidade()
+                        )
+                );
+
+        dialogo.setTitle(
+                "Le Café | PDV"
+        );
+
+        dialogo.setHeaderText(
+                "Alterar quantidade"
+        );
+
+        dialogo.setContentText(
+                "Nova quantidade:"
+        );
+
+        dialogo.showAndWait().ifPresent(
+                valor -> {
+
+                    try {
+
+                        int novaQuantidade =
+                                Integer.parseInt(
+                                        valor.trim()
+                                );
+
+                        if (novaQuantidade <= 0) {
+
+                            exibirAlerta(
+                                    Alert.AlertType.WARNING,
+                                    "Quantidade inválida",
+                                    "A quantidade deve ser maior que zero."
+                            );
+
+                            return;
+                        }
+
+                        itemSelecionado.setQuantidade(
+                                novaQuantidade
+                        );
+
+                        tabelaItens.refresh();
+
+                        rotuloValorUnitario.setText(
+                                formatarValor(
+                                        itemSelecionado
+                                                .getPrecoUnitarioCentavos()
+                                )
+                        );
+
+                        rotuloTotalItem.setText(
+                                formatarValor(
+                                        itemSelecionado
+                                                .getTotalCentavos()
+                                )
+                        );
+
+                        atualizarSubtotal();
+
+                        campoCodigo.requestFocus();
+
+                    } catch (NumberFormatException erro) {
+
+                        exibirAlerta(
+                                Alert.AlertType.WARNING,
+                                "Quantidade inválida",
+                                "Informe somente um número inteiro."
+                        );
+                    }
+                }
         );
     }
 
