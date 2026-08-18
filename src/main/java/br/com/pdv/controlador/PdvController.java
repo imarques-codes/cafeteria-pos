@@ -34,6 +34,12 @@ public class PdvController {
     private Label rotuloValorUnitario;
 
     @FXML
+    private Label rotuloTotalItem;
+
+    @FXML
+    private Label rotuloSubtotal;
+
+    @FXML
     private TableView<ItemVenda> tabelaItens;
 
     @FXML
@@ -183,9 +189,18 @@ public class PdvController {
                     )
             );
 
-            adicionarProdutoNaVenda(
-                    produto
+            ItemVenda itemAtual =
+                    adicionarProdutoNaVenda(
+                            produto
+                    );
+
+            rotuloTotalItem.setText(
+                    formatarValor(
+                            itemAtual.getTotalCentavos()
+                    )
             );
+
+            atualizarSubtotal();
 
             campoCodigo.clear();
             campoCodigo.requestFocus();
@@ -202,7 +217,7 @@ public class PdvController {
         }
     }
 
-    private void adicionarProdutoNaVenda(
+    private ItemVenda adicionarProdutoNaVenda(
             Produto produto
     ) {
 
@@ -219,7 +234,7 @@ public class PdvController {
 
                 tabelaItens.refresh();
 
-                return;
+                return item;
             }
         }
 
@@ -232,6 +247,25 @@ public class PdvController {
 
         itensVenda.add(
                 novoItem
+        );
+
+        return novoItem;
+    }
+
+    private void atualizarSubtotal() {
+
+        long subtotalCentavos = 0;
+
+        for (ItemVenda item : itensVenda) {
+
+            subtotalCentavos +=
+                    item.getTotalCentavos();
+        }
+
+        rotuloSubtotal.setText(
+                formatarValor(
+                        subtotalCentavos
+                )
         );
     }
 

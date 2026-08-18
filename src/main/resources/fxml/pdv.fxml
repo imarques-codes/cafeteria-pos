@@ -157,7 +157,8 @@
                     <Label text="TOTAL DO ITEM"
                            styleClass="titulo-campo"/>
 
-                    <Label text="R$ 0,00"
+                    <Label fx:id="rotuloTotalItem"
+                           text="R$ 0,00"
                            styleClass="valor"/>
 
                 </VBox>
@@ -247,7 +248,8 @@
 
                     <Region HBox.hgrow="ALWAYS"/>
 
-                    <Label text="R$ 0,00"
+                    <Label fx:id="rotuloSubtotal"
+                           text="R$ 0,00"
                            styleClass="valor-subtotal"/>
 
                 </HBox>
