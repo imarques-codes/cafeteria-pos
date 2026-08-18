@@ -20,66 +20,89 @@ public class InicializadorBanco {
                     ultimo_acesso TEXT
                 );
                 """;
+
         String sqlCaixa = """
-        CREATE TABLE IF NOT EXISTS caixa (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            codigo TEXT NOT NULL UNIQUE,
-            descricao TEXT,
-            ativo INTEGER NOT NULL DEFAULT 1
-        );
-        """;
+                CREATE TABLE IF NOT EXISTS caixa (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    codigo TEXT NOT NULL UNIQUE,
+                    descricao TEXT,
+                    ativo INTEGER NOT NULL DEFAULT 1
+                );
+                """;
 
         String sqlSessaoCaixa = """
-        CREATE TABLE IF NOT EXISTS sessao_caixa (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                CREATE TABLE IF NOT EXISTS sessao_caixa (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-            caixa_id INTEGER NOT NULL,
-            usuario_abertura_id INTEGER NOT NULL,
+                    caixa_id INTEGER NOT NULL,
+                    usuario_abertura_id INTEGER NOT NULL,
 
-            data_hora_abertura TEXT NOT NULL
-                DEFAULT CURRENT_TIMESTAMP,
+                    data_hora_abertura TEXT NOT NULL
+                        DEFAULT CURRENT_TIMESTAMP,
 
-            saldo_inicial_centavos INTEGER NOT NULL,
+                    saldo_inicial_centavos INTEGER NOT NULL,
 
-            usuario_fechamento_id INTEGER,
-            data_hora_fechamento TEXT,
-            saldo_final_centavos INTEGER,
+                    usuario_fechamento_id INTEGER,
+                    data_hora_fechamento TEXT,
+                    saldo_final_centavos INTEGER,
 
-            status TEXT NOT NULL DEFAULT 'ABERTO'
-                CHECK (status IN ('ABERTO', 'FECHADO')),
+                    status TEXT NOT NULL DEFAULT 'ABERTO'
+                        CHECK (status IN ('ABERTO', 'FECHADO')),
 
-            FOREIGN KEY (caixa_id)
-                REFERENCES caixa(id),
+                    FOREIGN KEY (caixa_id)
+                        REFERENCES caixa(id),
 
-            FOREIGN KEY (usuario_abertura_id)
-                REFERENCES usuario(id),
+                    FOREIGN KEY (usuario_abertura_id)
+                        REFERENCES usuario(id),
 
-            FOREIGN KEY (usuario_fechamento_id)
-                REFERENCES usuario(id)
-        );
-        """;
+                    FOREIGN KEY (usuario_fechamento_id)
+                        REFERENCES usuario(id)
+                );
+                """;
 
         String sqlIndiceSessaoAberta = """
-        CREATE UNIQUE INDEX IF NOT EXISTS
-        idx_sessao_caixa_aberta
+                CREATE UNIQUE INDEX IF NOT EXISTS
+                idx_sessao_caixa_aberta
 
-        ON sessao_caixa(caixa_id)
+                ON sessao_caixa(caixa_id)
 
-        WHERE status = 'ABERTO';
-        """;
+                WHERE status = 'ABERTO';
+                """;
 
         String sqlCaixaInicial = """
-        INSERT OR IGNORE INTO caixa (
-            codigo,
-            descricao,
-            ativo
-        )
-        VALUES (
-            '01',
-            'Caixa principal',
-            1
-        );
-        """;
+                INSERT OR IGNORE INTO caixa (
+                    codigo,
+                    descricao,
+                    ativo
+                )
+                VALUES (
+                    '01',
+                    'Caixa principal',
+                    1
+                );
+                """;
+
+        String sqlProduto = """
+                CREATE TABLE IF NOT EXISTS produto (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+                    codigo_barras TEXT UNIQUE,
+
+                    nome TEXT NOT NULL,
+
+                    descricao TEXT,
+
+                    preco_centavos INTEGER NOT NULL,
+
+                    controla_estoque INTEGER NOT NULL DEFAULT 1,
+
+                    estoque_atual INTEGER NOT NULL DEFAULT 0,
+
+                    ativo INTEGER NOT NULL DEFAULT 1,
+
+                    data_criacao TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+                );
+                """;
 
         try (
                 Connection conexao = ConexaoBanco.conectar();
@@ -95,6 +118,8 @@ public class InicializadorBanco {
             comando.execute(sqlIndiceSessaoAberta);
 
             comando.execute(sqlCaixaInicial);
+
+            comando.execute(sqlProduto);
         }
     }
 }
