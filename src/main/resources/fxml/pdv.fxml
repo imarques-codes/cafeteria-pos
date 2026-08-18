@@ -128,8 +128,10 @@
                 <Label text="CÓDIGO DE BARRAS"
                        styleClass="titulo-atalhos"/>
 
-                <TextField promptText="Leia ou digite o código"
-                           styleClass="campo-codigo"/>
+                <TextField fx:id="campoCodigo"
+                           promptText="Leia ou digite o código"
+                           styleClass="campo-codigo"
+                           onAction="#aoBuscarProduto"/>
 
 
                 <!-- VALOR UNITÁRIO -->
@@ -140,7 +142,8 @@
                     <Label text="VALOR UNITÁRIO"
                            styleClass="titulo-campo"/>
 
-                    <Label text="R$ 0,00"
+                    <Label fx:id="rotuloValorUnitario"
+                           text="R$ 0,00"
                            styleClass="valor"/>
 
                 </VBox>
