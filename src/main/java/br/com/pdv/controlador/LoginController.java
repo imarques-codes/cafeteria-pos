@@ -5,7 +5,7 @@ import br.com.pdv.dominio.SessaoCaixa;
 import br.com.pdv.dominio.Usuario;
 import br.com.pdv.servico.ServicoAutenticacao;
 import br.com.pdv.servico.ServicoCaixa;
-
+import javafx.scene.control.ToggleButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +13,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -25,6 +24,12 @@ public class LoginController {
     @FXML
     private PasswordField campoSenha;
 
+    @FXML
+    private TextField campoSenhaVisivel;
+
+    @FXML
+    private ToggleButton botaoMostrarSenha;
+
     private final ServicoAutenticacao servicoAutenticacao =
             new ServicoAutenticacao();
 
@@ -32,6 +37,60 @@ public class LoginController {
             new ServicoCaixa();
 
     private Stage janelaPrincipal;
+
+    @FXML
+    public void initialize() {
+
+        campoSenhaVisivel
+                .textProperty()
+                .bindBidirectional(
+                        campoSenha.textProperty()
+                );
+    }
+
+    @FXML
+    private void aoAlternarVisibilidadeSenha() {
+
+        boolean mostrar =
+                botaoMostrarSenha.isSelected();
+
+        campoSenhaVisivel.setVisible(
+                mostrar
+        );
+
+        campoSenhaVisivel.setManaged(
+                mostrar
+        );
+
+        campoSenha.setVisible(
+                !mostrar
+        );
+
+        campoSenha.setManaged(
+                !mostrar
+        );
+
+        if (mostrar) {
+
+            campoSenhaVisivel.requestFocus();
+
+            campoSenhaVisivel.positionCaret(
+                    campoSenhaVisivel
+                            .getText()
+                            .length()
+            );
+
+        } else {
+
+            campoSenha.requestFocus();
+
+            campoSenha.positionCaret(
+                    campoSenha
+                            .getText()
+                            .length()
+            );
+        }
+    }
 
     @FXML
     private void aoEntrar() {

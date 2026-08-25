@@ -77,6 +77,36 @@
     -fx-border-width: 2;
 }
 
+.campo-senha {
+    -fx-padding: 8 45 8 12;
+}
+
+.botao-olho {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 8 12;
+    -fx-cursor: hand;
+}
+
+.botao-olho:hover {
+    -fx-background-color: transparent;
+}
+
+.botao-olho:selected {
+    -fx-background-color: transparent;
+}
+
+.icone-olho {
+    -fx-fill: #8A7168;
+}
+
+.botao-olho:hover .icone-olho {
+    -fx-fill: #711F2C;
+}
+
+.botao-olho:selected .icone-olho {
+    -fx-fill: #5A1721;
+}
 /* =========================
    BOTÃO ENTRAR
    ========================= */

@@ -11,6 +11,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.layout.StackPane?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -67,11 +70,36 @@
 
             <!-- SENHA -->
 
-            <PasswordField fx:id="campoSenha"
-                            promptText="Digite sua senha"
-                            prefHeight="42"
-                            styleClass="campo-login"
-                            onAction="#aoEntrar"/>
+            <StackPane>
+
+                <PasswordField fx:id="campoSenha"
+                               promptText="Digite sua senha"
+                               prefHeight="42"
+                               styleClass="campo-login, campo-senha"
+                               onAction="#aoEntrar"/>
+
+                <TextField fx:id="campoSenhaVisivel"
+                           promptText="Digite sua senha"
+                           prefHeight="42"
+                           styleClass="campo-login, campo-senha"
+                           visible="false"
+                           managed="false"
+                           onAction="#aoEntrar"/>
+
+                <ToggleButton fx:id="botaoMostrarSenha"
+                              onAction="#aoAlternarVisibilidadeSenha"
+                              focusTraversable="false"
+                              styleClass="botao-olho"
+                              StackPane.alignment="CENTER_RIGHT">
+
+                    <graphic>
+                        <SVGPath styleClass="icone-olho"
+                                 content="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                    </graphic>
+
+                </ToggleButton>
+
+            </StackPane>
 
             <Button text="ENTRAR"
                     prefHeight="44"
