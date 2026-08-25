@@ -22,6 +22,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
+import javafx.stage.Modality;
 
 public class PdvController {
 
@@ -111,6 +112,14 @@ public class PdvController {
                                     evento.consume();
 
                                     aoRemoverItem();
+
+                                } else if (
+                                        evento.getCode() == KeyCode.F10
+                                ) {
+
+                                    evento.consume();
+
+                                    aoFinalizarVenda();
                                 }
                             }
                     );
@@ -524,6 +533,120 @@ public class PdvController {
                     }
                 }
         );
+    }
+
+    private void aoFinalizarVenda() {
+
+        if (itensVenda.isEmpty()) {
+
+            exibirAlerta(
+                    Alert.AlertType.WARNING,
+                    "Venda vazia",
+                    "Adicione pelo menos um produto antes de finalizar a venda."
+            );
+
+            campoCodigo.requestFocus();
+
+            return;
+        }
+
+        try {
+
+            var recurso =
+                    getClass().getResource(
+                            "/fxml/pagamento.fxml"
+                    );
+
+            if (recurso == null) {
+
+                exibirAlerta(
+                        Alert.AlertType.ERROR,
+                        "Arquivo não encontrado",
+                        "Não foi possível localizar pagamento.fxml."
+                );
+
+                return;
+            }
+
+            FXMLLoader carregador =
+                    new FXMLLoader(recurso);
+
+            Scene cenaPagamento =
+                    new Scene(
+                            carregador.load()
+                    );
+
+            PagamentoController controlador =
+                    carregador.getController();
+
+            controlador.configurarVenda(
+                    itensVenda,
+                    this::limparVenda
+            );
+
+            Stage janelaPagamento =
+                    new Stage();
+
+            janelaPagamento.setTitle(
+                    "Le Café | Cafeteria Premium - Pagamento"
+            );
+
+            janelaPagamento.setScene(
+                    cenaPagamento
+            );
+
+            janelaPagamento.initOwner(
+                    tabelaItens
+                            .getScene()
+                            .getWindow()
+            );
+
+            janelaPagamento.initModality(
+                    Modality.WINDOW_MODAL
+            );
+
+            janelaPagamento.setResizable(
+                    false
+            );
+
+            janelaPagamento.centerOnScreen();
+
+            janelaPagamento.showAndWait();
+
+            campoCodigo.requestFocus();
+
+        } catch (IOException erro) {
+
+            erro.printStackTrace();
+
+            exibirAlerta(
+                    Alert.AlertType.ERROR,
+                    "Erro no sistema",
+                    "Não foi possível abrir a tela de pagamento."
+            );
+        }
+    }
+
+    private void limparVenda() {
+
+        itensVenda.clear();
+
+        tabelaItens.refresh();
+
+        rotuloValorUnitario.setText(
+                "R$ 0,00"
+        );
+
+        rotuloTotalItem.setText(
+                "R$ 0,00"
+        );
+
+        rotuloSubtotal.setText(
+                "R$ 0,00"
+        );
+
+        campoCodigo.clear();
+        campoCodigo.requestFocus();
     }
 
     @FXML

@@ -1,0 +1,135 @@
+.tela-pagamento {
+    -fx-background-color: #F7F1EB;
+}
+
+.titulo-pagamento {
+    -fx-text-fill: #5A1721;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.painel-total {
+    -fx-background-color: #711F2C;
+    -fx-padding: 14 18;
+    -fx-background-radius: 8;
+}
+
+.titulo-total {
+    -fx-text-fill: #F3E6DC;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.valor-total {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+.titulo-secao {
+    -fx-text-fill: #5A1721;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.botao-pagamento {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #5A1721;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+
+    -fx-border-color: #D8C7BD;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 6;
+
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.botao-pagamento:hover {
+    -fx-background-color: #F3E6DC;
+    -fx-border-color: #711F2C;
+}
+
+.botao-pagamento:focused {
+    -fx-border-color: #711F2C;
+    -fx-border-width: 2;
+}
+
+.rotulo-campo {
+    -fx-text-fill: #5A1721;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.campo-valor {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #4A302B;
+    -fx-font-size: 18px;
+
+    -fx-padding: 8 12;
+
+    -fx-background-radius: 6;
+    -fx-border-color: #D8C7BD;
+    -fx-border-radius: 6;
+}
+
+.campo-valor:focused {
+    -fx-border-color: #711F2C;
+    -fx-border-width: 2;
+}
+
+.valor-troco {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #5A1721;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+
+    -fx-padding: 10 12;
+
+    -fx-background-radius: 6;
+    -fx-border-color: #D8C7BD;
+    -fx-border-radius: 6;
+}
+
+.botao-confirmar {
+    -fx-background-color: #711F2C;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.botao-confirmar:hover {
+    -fx-background-color: #5A1721;
+}
+
+.botao-cancelar {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #5A1721;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+
+    -fx-border-color: #711F2C;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+
+    -fx-cursor: hand;
+}
+
+.botao-cancelar:hover {
+    -fx-background-color: #F3E6DC;
+}
+
+.botao-pagamento-selecionado {
+    -fx-background-color: #711F2C;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #711F2C;
+}
+
+.rodape {
+    -fx-text-fill: #8A7168;
+    -fx-font-size: 11px;
+}
