@@ -4,7 +4,6 @@ import br.com.pdv.dominio.ItemVenda;
 import br.com.pdv.dominio.PagamentoVenda;
 import br.com.pdv.dominio.Venda;
 import br.com.pdv.infraestrutura.ConexaoBanco;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -152,6 +151,10 @@ public class VendaRepositorio {
 
                 comandoItem.executeBatch();
             }
+            baixarEstoque(
+                    conexao,
+                    venda
+            );
 
             try (
                     PreparedStatement comandoPagamento =
@@ -242,6 +245,74 @@ public class VendaRepositorio {
             }
 
             conexao.close();
+        }
+    }    private void baixarEstoque(
+            Connection conexao,
+            Venda venda
+    ) throws SQLException {
+
+        String sql = """
+                UPDATE produto
+                SET estoque_atual = estoque_atual - ?
+                WHERE id = ?
+                  AND controla_estoque = 1
+                  AND estoque_atual >= ?;
+                """;
+
+        try (
+                PreparedStatement comando =
+                        conexao.prepareStatement(sql)
+        ) {
+
+            for (
+                    ItemVenda item :
+                    venda.getItens()
+            ) {
+
+                if (
+                        !item
+                                .getProduto()
+                                .isControlaEstoque()
+                ) {
+
+                    continue;
+                }
+
+                int quantidade =
+                        item.getQuantidade();
+
+                comando.setInt(
+                        1,
+                        quantidade
+                );
+
+                comando.setInt(
+                        2,
+                        item
+                                .getProduto()
+                                .getId()
+                );
+
+                comando.setInt(
+                        3,
+                        quantidade
+                );
+
+                int linhasAlteradas =
+                        comando.executeUpdate();
+
+                if (
+                        linhasAlteradas != 1
+                ) {
+
+                    throw new SQLException(
+                            "Estoque insuficiente para o produto: "
+                                    + item
+                                    .getProduto()
+                                    .getNome()
+                    );
+                }
+            }
         }
     }
 }
