@@ -1,10 +1,8 @@
 package br.com.pdv.controlador;
-
 import br.com.pdv.aplicacao.SessaoUsuario;
 import br.com.pdv.dominio.ItemVenda;
 import br.com.pdv.dominio.Produto;
 import br.com.pdv.repositorio.ProdutoRepositorio;
-
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -22,7 +20,6 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -105,12 +102,20 @@ public class PdvController {
                                     evento.consume();
 
                                     aoAlterarQuantidade();
+
+                                } else if (
+                                        evento.getCode() == KeyCode.DELETE
+                                                && tabelaItens.isFocused()
+                                ) {
+
+                                    evento.consume();
+
+                                    aoRemoverItem();
                                 }
                             }
                     );
         });
     }
-
     private void configurarTabela() {
 
         colunaItem.setCellValueFactory(
@@ -368,6 +373,142 @@ public class PdvController {
                                                 .getTotalCentavos()
                                 )
                         );
+
+                        atualizarSubtotal();
+
+                        campoCodigo.requestFocus();
+
+                    } catch (NumberFormatException erro) {
+
+                        exibirAlerta(
+                                Alert.AlertType.WARNING,
+                                "Quantidade inválida",
+                                "Informe somente um número inteiro."
+                        );
+                    }
+                }
+        );
+    }
+
+    private void aoRemoverItem() {
+
+        ItemVenda itemSelecionado =
+                tabelaItens
+                        .getSelectionModel()
+                        .getSelectedItem();
+
+        if (itemSelecionado == null) {
+
+            exibirAlerta(
+                    Alert.AlertType.WARNING,
+                    "Item não selecionado",
+                    "Selecione um produto na tabela antes de remover uma quantidade."
+            );
+
+            return;
+        }
+
+        TextInputDialog dialogo =
+                new TextInputDialog("1");
+
+        dialogo.setTitle(
+                "Le Café | PDV"
+        );
+
+        dialogo.setHeaderText(
+                "Remover quantidade"
+        );
+
+        dialogo.setContentText(
+                "Quantidade a remover de "
+                        + itemSelecionado
+                        .getProduto()
+                        .getNome()
+                        + " (atual: "
+                        + itemSelecionado.getQuantidade()
+                        + "):"
+        );
+
+        dialogo.showAndWait().ifPresent(
+                valor -> {
+
+                    try {
+
+                        int quantidadeRemover =
+                                Integer.parseInt(
+                                        valor.trim()
+                                );
+
+                        if (quantidadeRemover <= 0) {
+
+                            exibirAlerta(
+                                    Alert.AlertType.WARNING,
+                                    "Quantidade inválida",
+                                    "A quantidade a remover deve ser maior que zero."
+                            );
+
+                            return;
+                        }
+
+                        int quantidadeAtual =
+                                itemSelecionado
+                                        .getQuantidade();
+
+                        if (quantidadeRemover > quantidadeAtual) {
+
+                            exibirAlerta(
+                                    Alert.AlertType.WARNING,
+                                    "Quantidade inválida",
+                                    "Não é possível remover mais unidades do que existem no item."
+                            );
+
+                            return;
+                        }
+
+                        if (quantidadeRemover == quantidadeAtual) {
+
+                            itensVenda.remove(
+                                    itemSelecionado
+                            );
+
+                            rotuloValorUnitario.setText(
+                                    "R$ 0,00"
+                            );
+
+                            rotuloTotalItem.setText(
+                                    "R$ 0,00"
+                            );
+
+                        } else {
+
+                            int novaQuantidade =
+                                    quantidadeAtual
+                                            - quantidadeRemover;
+
+                            itemSelecionado.setQuantidade(
+                                    novaQuantidade
+                            );
+
+                            rotuloValorUnitario.setText(
+                                    formatarValor(
+                                            itemSelecionado
+                                                    .getPrecoUnitarioCentavos()
+                                    )
+                            );
+
+                            rotuloTotalItem.setText(
+                                    formatarValor(
+                                            itemSelecionado
+                                                    .getTotalCentavos()
+                                    )
+                            );
+                        }
+
+                        tabelaItens
+                                .getSelectionModel()
+                                .clearSelection();
+
+                        tabelaItens.refresh();
 
                         atualizarSubtotal();
 

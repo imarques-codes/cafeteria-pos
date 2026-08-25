@@ -1,0 +1,43 @@
+.tela-carregamento {
+    -fx-background-color: #f4efe9;
+}
+
+.cartao-carregamento {
+    -fx-background-color: white;
+    -fx-background-radius: 24;
+    -fx-border-color: #d9c6bc;
+    -fx-border-radius: 24;
+    -fx-padding: 50 40 40 40;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.10), 18, 0.20, 0, 4);
+}
+
+.titulo-carregamento {
+    -fx-text-fill: #6d0f1d;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.percentual-carregamento {
+    -fx-text-fill: #6d0f1d;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.fabricante {
+    -fx-text-fill: #8b6f67;
+    -fx-font-size: 15px;
+}
+
+.barra-carregamento {
+    -fx-pref-height: 18px;
+}
+
+.barra-carregamento .track {
+    -fx-background-color: #eadfd7;
+    -fx-background-radius: 10;
+}
+
+.barra-carregamento .bar {
+    -fx-background-color: #7b1423;
+    -fx-background-radius: 10;
+}

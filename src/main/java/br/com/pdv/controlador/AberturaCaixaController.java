@@ -1,9 +1,8 @@
 package br.com.pdv.controlador;
-
+import br.com.pdv.utilitario.FormatadorMoeda;
 import br.com.pdv.aplicacao.SessaoUsuario;
 import br.com.pdv.dominio.SessaoCaixa;
 import br.com.pdv.servico.ServicoCaixa;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,10 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.sql.SQLException;
 
 public class AberturaCaixaController {
@@ -34,7 +30,10 @@ public class AberturaCaixaController {
     @FXML
     public void initialize() {
 
-        if (SessaoUsuario.estaLogado()) {
+        if (
+                SessaoUsuario.estaLogado()
+                        && SessaoUsuario.getUsuarioLogado() != null
+        ) {
 
             rotuloOperador.setText(
                     SessaoUsuario
@@ -46,6 +45,12 @@ public class AberturaCaixaController {
         rotuloCaixa.setText(
                 "01 - Caixa principal"
         );
+
+        FormatadorMoeda.aplicarMascara(
+                campoSaldoInicial
+        );
+
+        campoSaldoInicial.requestFocus();
     }
 
     @FXML
@@ -72,7 +77,7 @@ public class AberturaCaixaController {
         try {
 
             long saldoCentavos =
-                    converterParaCentavos(
+                    FormatadorMoeda.converterParaCentavos(
                             saldoInformado
                     );
 
@@ -120,30 +125,6 @@ public class AberturaCaixaController {
         }
     }
 
-    private long converterParaCentavos(
-            String valor
-    ) {
-
-        String valorNormalizado =
-                valor
-                        .replace("R$", "")
-                        .replace(" ", "")
-                        .replace(",", ".");
-
-        BigDecimal valorDecimal =
-                new BigDecimal(valorNormalizado);
-
-        if (valorDecimal.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException(
-                    "O saldo inicial não pode ser negativo."
-            );
-        }
-
-        return valorDecimal
-                .multiply(new BigDecimal("100"))
-                .setScale(0, RoundingMode.HALF_UP)
-                .longValueExact();
-    }
 
     private void abrirPdv() throws IOException {
 

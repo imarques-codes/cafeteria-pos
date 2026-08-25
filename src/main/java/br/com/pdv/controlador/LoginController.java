@@ -31,13 +31,24 @@ public class LoginController {
     private final ServicoCaixa servicoCaixa =
             new ServicoCaixa();
 
+    private Stage janelaPrincipal;
+
     @FXML
     private void aoEntrar() {
 
-        String login = campoUsuario.getText().trim();
-        String senha = campoSenha.getText();
+        String login =
+                campoUsuario
+                        .getText()
+                        .trim();
 
-        if (login.isEmpty() || senha.isEmpty()) {
+        String senha =
+                campoSenha
+                        .getText();
+
+        if (
+                login.isEmpty()
+                        || senha.isEmpty()
+        ) {
 
             exibirAlerta(
                     Alert.AlertType.WARNING,
@@ -70,13 +81,78 @@ public class LoginController {
                 return;
             }
 
-            SessaoUsuario.iniciar(usuario);
+            SessaoUsuario.iniciar(
+                    usuario
+            );
+
+            abrirCarregamento();
+
+        } catch (SQLException erro) {
+
+            erro.printStackTrace();
 
             exibirAlerta(
-                    Alert.AlertType.INFORMATION,
-                    "Login realizado",
-                    "Bem-vindo(a), " + usuario.getNome() + "!"
+                    Alert.AlertType.ERROR,
+                    "Erro no sistema",
+                    "Não foi possível acessar o banco de dados."
             );
+        }
+    }
+
+    private void abrirCarregamento() {
+
+        try {
+
+            FXMLLoader carregador =
+                    new FXMLLoader(
+                            getClass().getResource(
+                                    "/fxml/carregamento.fxml"
+                            )
+                    );
+
+            Scene cenaCarregamento =
+                    new Scene(
+                            carregador.load()
+                    );
+
+            CarregamentoController controlador =
+                    carregador.getController();
+
+            janelaPrincipal =
+                    (Stage)
+                            campoUsuario
+                                    .getScene()
+                                    .getWindow();
+
+            janelaPrincipal.setTitle(
+                    "Le Café | Cafeteria Premium - Carregando"
+            );
+
+            janelaPrincipal.setScene(
+                    cenaCarregamento
+            );
+
+            janelaPrincipal.centerOnScreen();
+
+            controlador.iniciarCarregamento(
+                    this::abrirFluxoAposLogin
+            );
+
+        } catch (IOException erro) {
+
+            erro.printStackTrace();
+
+            exibirAlerta(
+                    Alert.AlertType.ERROR,
+                    "Erro no sistema",
+                    "Não foi possível abrir a tela de carregamento."
+            );
+        }
+    }
+
+    private void abrirFluxoAposLogin() {
+
+        try {
 
             SessaoCaixa sessaoAberta =
                     servicoCaixa.buscarSessaoAberta(
@@ -99,7 +175,7 @@ public class LoginController {
             exibirAlerta(
                     Alert.AlertType.ERROR,
                     "Erro no sistema",
-                    "Não foi possível acessar o banco de dados."
+                    "Não foi possível verificar a situação do caixa."
             );
         }
     }
@@ -120,18 +196,15 @@ public class LoginController {
                             carregador.load()
                     );
 
-            Stage janela =
-                    (Stage)
-                            campoUsuario
-                                    .getScene()
-                                    .getWindow();
-
-            janela.setTitle(
+            janelaPrincipal.setTitle(
                     "Le Café | Cafeteria Premium - Abertura de Caixa"
             );
 
-            janela.setScene(cenaAbertura);
-            janela.centerOnScreen();
+            janelaPrincipal.setScene(
+                    cenaAbertura
+            );
+
+            janelaPrincipal.centerOnScreen();
 
         } catch (IOException erro) {
 
@@ -161,18 +234,15 @@ public class LoginController {
                             carregador.load()
                     );
 
-            Stage janela =
-                    (Stage)
-                            campoUsuario
-                                    .getScene()
-                                    .getWindow();
-
-            janela.setTitle(
+            janelaPrincipal.setTitle(
                     "Le Café | Cafeteria Premium - PDV"
             );
 
-            janela.setScene(cenaPdv);
-            janela.centerOnScreen();
+            janelaPrincipal.setScene(
+                    cenaPdv
+            );
+
+            janelaPrincipal.centerOnScreen();
 
         } catch (IOException erro) {
 
@@ -192,14 +262,20 @@ public class LoginController {
             String mensagem
     ) {
 
-        Alert alerta = new Alert(tipo);
+        Alert alerta =
+                new Alert(tipo);
 
         alerta.setTitle(
                 "Le Café | PDV"
         );
 
-        alerta.setHeaderText(titulo);
-        alerta.setContentText(mensagem);
+        alerta.setHeaderText(
+                titulo
+        );
+
+        alerta.setContentText(
+                mensagem
+        );
 
         alerta.showAndWait();
     }
