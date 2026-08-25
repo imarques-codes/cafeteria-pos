@@ -219,6 +219,36 @@ public class PdvController {
                 return;
             }
 
+            int quantidadeAtual =
+                    obterQuantidadeNoCarrinho(
+                            produto
+                    );
+
+            int novaQuantidade =
+                    quantidadeAtual + 1;
+
+            if (
+                    produto.isControlaEstoque()
+                            && novaQuantidade
+                            > produto.getEstoqueAtual()
+            ) {
+
+                exibirAlerta(
+                        Alert.AlertType.WARNING,
+                        "Estoque insuficiente",
+                        "Estoque disponível para "
+                                + produto.getNome()
+                                + ": "
+                                + produto.getEstoqueAtual()
+                                + " unidade(s)."
+                );
+
+                campoCodigo.clear();
+                campoCodigo.requestFocus();
+
+                return;
+            }
+
             rotuloValorUnitario.setText(
                     formatarValor(
                             produto.getPrecoCentavos()
@@ -286,6 +316,24 @@ public class PdvController {
         );
 
         return novoItem;
+    }
+
+    private int obterQuantidadeNoCarrinho(
+            Produto produto
+    ) {
+
+        for (ItemVenda item : itensVenda) {
+
+            if (
+                    item.getProduto().getId()
+                            == produto.getId()
+            ) {
+
+                return item.getQuantidade();
+            }
+        }
+
+        return 0;
     }
 
     private void atualizarSubtotal() {
@@ -359,6 +407,30 @@ public class PdvController {
                                     "Quantidade inválida",
                                     "A quantidade deve ser maior que zero."
                             );
+
+                            return;
+                        }
+
+                        Produto produto =
+                                itemSelecionado.getProduto();
+
+                        if (
+                                produto.isControlaEstoque()
+                                        && novaQuantidade
+                                        > produto.getEstoqueAtual()
+                        ) {
+
+                            exibirAlerta(
+                                    Alert.AlertType.WARNING,
+                                    "Estoque insuficiente",
+                                    "Estoque disponível para "
+                                            + produto.getNome()
+                                            + ": "
+                                            + produto.getEstoqueAtual()
+                                            + " unidade(s)."
+                            );
+
+                            campoCodigo.requestFocus();
 
                             return;
                         }
