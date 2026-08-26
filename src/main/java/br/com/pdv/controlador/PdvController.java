@@ -98,6 +98,38 @@ public class PdvController {
                             KeyEvent.KEY_PRESSED,
                             evento -> {
 
+                                if (evento.getCode() == KeyCode.F2) {
+
+                                    evento.consume();
+
+                                    aoAbrirProdutos();
+
+                                } else if (
+                                        evento.getCode() == KeyCode.F4
+                                ) {
+
+                                    evento.consume();
+
+                                    aoAlterarQuantidade();
+
+                                } else if (
+                                        evento.getCode() == KeyCode.DELETE
+                                                && tabelaItens.isFocused()
+                                ) {
+
+                                    evento.consume();
+
+                                    aoRemoverItem();
+
+                                } else if (
+                                        evento.getCode() == KeyCode.F10
+                                ) {
+
+                                    evento.consume();
+
+                                    aoFinalizarVenda();
+                                }
+
                                 if (evento.getCode() == KeyCode.F4) {
 
                                     evento.consume();
@@ -605,6 +637,77 @@ public class PdvController {
                     }
                 }
         );
+    }
+
+    private void aoAbrirProdutos() {
+
+        try {
+
+            var recurso =
+                    getClass().getResource(
+                            "/fxml/produtos.fxml"
+                    );
+
+            if (recurso == null) {
+
+                exibirAlerta(
+                        Alert.AlertType.ERROR,
+                        "Arquivo não encontrado",
+                        "Não foi possível localizar produtos.fxml."
+                );
+
+                return;
+            }
+
+            FXMLLoader carregador =
+                    new FXMLLoader(recurso);
+
+            Scene cenaProdutos =
+                    new Scene(
+                            carregador.load()
+                    );
+
+            Stage janelaProdutos =
+                    new Stage();
+
+            janelaProdutos.setTitle(
+                    "Le Café | Cafeteria Premium - Produtos"
+            );
+
+            janelaProdutos.setScene(
+                    cenaProdutos
+            );
+
+            janelaProdutos.initOwner(
+                    tabelaItens
+                            .getScene()
+                            .getWindow()
+            );
+
+            janelaProdutos.initModality(
+                    Modality.WINDOW_MODAL
+            );
+
+            janelaProdutos.setResizable(
+                    false
+            );
+
+            janelaProdutos.centerOnScreen();
+
+            janelaProdutos.showAndWait();
+
+            campoCodigo.requestFocus();
+
+        } catch (IOException erro) {
+
+            erro.printStackTrace();
+
+            exibirAlerta(
+                    Alert.AlertType.ERROR,
+                    "Erro no sistema",
+                    "Não foi possível abrir a tela de produtos."
+            );
+        }
     }
 
     private void aoFinalizarVenda() {

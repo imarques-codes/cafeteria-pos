@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.pdv.controlador.ProdutosController"
+            prefWidth="1150"
+            prefHeight="720"
+            stylesheets="@../css/produtos.css"
+            styleClass="tela-produtos">
+
+    <top>
+
+        <HBox alignment="CENTER_LEFT"
+              spacing="15"
+              styleClass="cabecalho-produtos">
+
+            <padding>
+                <Insets top="12"
+                        right="20"
+                        bottom="12"
+                        left="20"/>
+            </padding>
+
+            <ImageView fitWidth="70"
+                       fitHeight="55"
+                       preserveRatio="true">
+
+                <image>
+                    <Image url="@../imagens/logo-le-cafe.png"/>
+                </image>
+
+            </ImageView>
+
+            <VBox spacing="2">
+
+                <Label text="GERENCIAMENTO DE PRODUTOS"
+                       styleClass="titulo-produtos"/>
+
+                <Label text="Cadastro, preços e controle de estoque"
+                       styleClass="subtitulo-produtos"/>
+
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button fx:id="botaoFechar"
+                    text="FECHAR"
+                    prefWidth="100"
+                    prefHeight="38"
+                    onAction="#aoFechar"
+                    styleClass="botao-secundario"/>
+
+        </HBox>
+
+    </top>
+
+    <center>
+
+        <HBox spacing="20">
+
+            <padding>
+                <Insets top="20"
+                        right="20"
+                        bottom="20"
+                        left="20"/>
+            </padding>
+
+            <!-- LISTA DE PRODUTOS -->
+
+            <VBox spacing="12"
+                  prefWidth="650">
+
+                <HBox spacing="10">
+
+                    <TextField fx:id="campoPesquisa"
+                               promptText="Pesquisar por nome ou código..."
+                               prefHeight="40"
+                               HBox.hgrow="ALWAYS"/>
+
+                    <Button fx:id="botaoNovo"
+                            text="NOVO PRODUTO"
+                            prefWidth="140"
+                            prefHeight="40"
+                            onAction="#aoNovoProduto"
+                            styleClass="botao-principal"/>
+
+                </HBox>
+
+                <TableView fx:id="tabelaProdutos"
+                           VBox.vgrow="ALWAYS">
+
+                    <columns>
+
+                        <TableColumn fx:id="colunaCodigo"
+                                     text="Código"
+                                     prefWidth="120"/>
+
+                        <TableColumn fx:id="colunaNome"
+                                     text="Produto"
+                                     prefWidth="230"/>
+
+                        <TableColumn fx:id="colunaPreco"
+                                     text="Preço"
+                                     prefWidth="100"/>
+
+                        <TableColumn fx:id="colunaEstoque"
+                                     text="Estoque"
+                                     prefWidth="90"/>
+
+                        <TableColumn fx:id="colunaStatus"
+                                     text="Status"
+                                     prefWidth="90"/>
+
+                    </columns>
+
+                </TableView>
+
+            </VBox>
+
+            <!-- FORMULÁRIO -->
+
+            <VBox spacing="12"
+                  prefWidth="420"
+                  styleClass="painel-formulario">
+
+                <padding>
+                    <Insets top="20"
+                            right="20"
+                            bottom="20"
+                            left="20"/>
+                </padding>
+
+                <Label text="Dados do produto"
+                       styleClass="titulo-formulario"/>
+
+                <Label text="Código de barras"
+                       styleClass="rotulo-campo"/>
+
+                <TextField fx:id="campoCodigoBarras"
+                           promptText="Opcional"
+                           prefHeight="40"/>
+
+                <Label text="Nome do produto"
+                       styleClass="rotulo-campo"/>
+
+                <TextField fx:id="campoNome"
+                           promptText="Ex.: Coca-Cola 350ml"
+                           prefHeight="40"/>
+
+                <Label text="Descrição"
+                       styleClass="rotulo-campo"/>
+
+                <TextArea fx:id="campoDescricao"
+                          promptText="Descrição opcional"
+                          prefRowCount="3"
+                          wrapText="true"/>
+
+                <Label text="Preço de venda"
+                       styleClass="rotulo-campo"/>
+
+                <TextField fx:id="campoPreco"
+                           promptText="R$ 0,00"
+                           prefHeight="40"/>
+
+                <CheckBox fx:id="checkControlaEstoque"
+                          text="Controlar estoque"/>
+
+                <VBox fx:id="painelEstoque"
+                      spacing="5">
+
+                    <Label text="Estoque atual"
+                           styleClass="rotulo-campo"/>
+
+                    <TextField fx:id="campoEstoque"
+                               promptText="0"
+                               prefHeight="40"/>
+
+                </VBox>
+
+                <CheckBox fx:id="checkAtivo"
+                          text="Produto ativo"
+                          selected="true"/>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <HBox spacing="10">
+
+                    <Button fx:id="botaoCancelar"
+                            text="CANCELAR"
+                            prefWidth="120"
+                            prefHeight="42"
+                            onAction="#aoCancelar"
+                            styleClass="botao-secundario"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Button fx:id="botaoSalvar"
+                            text="SALVAR PRODUTO"
+                            prefWidth="170"
+                            prefHeight="42"
+                            onAction="#aoSalvarProduto"
+                            styleClass="botao-principal"/>
+
+                </HBox>
+
+            </VBox>
+
+        </HBox>
+
+    </center>
+
+</BorderPane>

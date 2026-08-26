@@ -136,6 +136,21 @@ public class FormatadorMoeda {
         );
     }
 
+    public static void definirValor(
+            TextField campo,
+            long centavos
+    ) {
+
+        if (centavos < 0) {
+            centavos = 0;
+        }
+
+        atualizarCampo(
+                campo,
+                centavos
+        );
+    }
+
     private static long obterCentavos(
             TextField campo
     ) {
