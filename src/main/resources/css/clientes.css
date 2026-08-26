@@ -1,0 +1,155 @@
+.tela-clientes {
+    -fx-background-color: #F7F1EB;
+}
+
+/* =========================
+   CABEÇALHO
+   ========================= */
+
+.cabecalho-clientes {
+    -fx-background-color: #5A1721;
+}
+
+.titulo-clientes {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+}
+
+.subtitulo-clientes {
+    -fx-text-fill: #F3E6DC;
+    -fx-font-size: 12px;
+}
+
+/* =========================
+   FORMULÁRIO
+   ========================= */
+
+.painel-formulario {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8;
+    -fx-border-color: #E3D5CC;
+    -fx-border-radius: 8;
+}
+
+.titulo-formulario {
+    -fx-text-fill: #5A1721;
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+}
+
+.rotulo-campo {
+    -fx-text-fill: #4A302B;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.text-field {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #4A302B;
+    -fx-font-size: 13px;
+    -fx-border-color: #D8C7BD;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.text-field:focused {
+    -fx-border-color: #711F2C;
+    -fx-border-width: 2;
+}
+
+/* =========================
+   CHECKBOX
+   ========================= */
+
+.check-box {
+    -fx-text-fill: #4A302B;
+    -fx-font-size: 13px;
+}
+
+.check-box .box {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D8C7BD;
+    -fx-border-radius: 3;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #711F2C;
+    -fx-border-color: #711F2C;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #FFFFFF;
+}
+
+/* =========================
+   TABELA
+   ========================= */
+
+.table-view {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D8C7BD;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #711F2C;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent transparent #EEE3DC transparent;
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: #F3E6DC;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: #E5CFC2;
+}
+
+.table-row-cell:filled:selected .text {
+    -fx-fill: #4A302B;
+}
+
+/* =========================
+   BOTÕES
+   ========================= */
+
+.botao-principal {
+    -fx-background-color: #711F2C;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.botao-principal:hover {
+    -fx-background-color: #5A1721;
+}
+
+.botao-secundario {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #5A1721;
+    -fx-font-weight: bold;
+    -fx-border-color: #711F2C;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.botao-secundario:hover {
+    -fx-background-color: #F3E6DC;
+}

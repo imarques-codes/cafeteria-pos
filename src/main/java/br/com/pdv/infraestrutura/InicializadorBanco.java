@@ -104,6 +104,19 @@ public class InicializadorBanco {
                 );
                 """;
 
+        String sqlCliente = """
+        CREATE TABLE IF NOT EXISTS cliente (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            cpf TEXT UNIQUE,
+            telefone TEXT,
+            email TEXT,
+            data_cadastro TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            ativo INTEGER NOT NULL DEFAULT 1
+                CHECK (ativo IN (0, 1))
+        );
+        """;
+
         String sqlVenda = """
         CREATE TABLE IF NOT EXISTS venda (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -204,6 +217,8 @@ public class InicializadorBanco {
             comando.execute(sqlItemVenda);
 
             comando.execute(sqlPagamentoVenda);
+
+            comando.execute(sqlCliente);
         }
     }
 }

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.pdv.controlador.ClientesController"
+            prefWidth="1100"
+            prefHeight="680"
+            stylesheets="@../css/clientes.css"
+            styleClass="tela-clientes">
+
+    <top>
+
+        <HBox alignment="CENTER_LEFT"
+              spacing="15"
+              styleClass="cabecalho-clientes">
+
+            <padding>
+                <Insets top="12"
+                        right="20"
+                        bottom="12"
+                        left="20"/>
+            </padding>
+
+            <ImageView fitWidth="70"
+                       fitHeight="55"
+                       preserveRatio="true">
+
+                <image>
+                    <Image url="@../imagens/logo-le-cafe.png"/>
+                </image>
+
+            </ImageView>
+
+            <VBox spacing="2">
+
+                <Label text="GERENCIAMENTO DE CLIENTES"
+                       styleClass="titulo-clientes"/>
+
+                <Label text="Cadastro e manutenção de clientes"
+                       styleClass="subtitulo-clientes"/>
+
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button fx:id="botaoFechar"
+                    text="FECHAR"
+                    prefWidth="100"
+                    prefHeight="38"
+                    onAction="#aoFechar"
+                    styleClass="botao-secundario"/>
+
+        </HBox>
+
+    </top>
+
+    <center>
+
+        <HBox spacing="20">
+
+            <padding>
+                <Insets top="20"
+                        right="20"
+                        bottom="20"
+                        left="20"/>
+            </padding>
+
+            <!-- LISTA DE CLIENTES -->
+
+            <VBox spacing="12"
+                  prefWidth="620">
+
+                <HBox spacing="10">
+
+                    <TextField fx:id="campoPesquisa"
+                               promptText="Pesquisar por nome, CPF ou telefone..."
+                               prefHeight="40"
+                               HBox.hgrow="ALWAYS"/>
+
+                    <Button fx:id="botaoNovo"
+                            text="NOVO CLIENTE"
+                            prefWidth="140"
+                            prefHeight="40"
+                            onAction="#aoNovoCliente"
+                            styleClass="botao-principal"/>
+
+                </HBox>
+
+                <TableView fx:id="tabelaClientes"
+                           VBox.vgrow="ALWAYS">
+
+                    <columns>
+
+                        <TableColumn fx:id="colunaNome"
+                                     text="Nome"
+                                     prefWidth="180"/>
+
+                        <TableColumn fx:id="colunaCpf"
+                                     text="CPF"
+                                     prefWidth="125"/>
+
+                        <TableColumn fx:id="colunaTelefone"
+                                     text="Telefone"
+                                     prefWidth="125"/>
+
+                        <TableColumn fx:id="colunaEmail"
+                                     text="E-mail"
+                                     prefWidth="180"/>
+
+                        <TableColumn fx:id="colunaStatus"
+                                     text="Status"
+                                     prefWidth="80"/>
+
+                    </columns>
+
+                </TableView>
+
+            </VBox>
+
+            <!-- FORMULÁRIO -->
+
+            <VBox spacing="12"
+                  prefWidth="400"
+                  styleClass="painel-formulario">
+
+                <padding>
+                    <Insets top="20"
+                            right="20"
+                            bottom="20"
+                            left="20"/>
+                </padding>
+
+                <Label text="Dados do cliente"
+                       styleClass="titulo-formulario"/>
+
+                <Label text="Nome"
+                       styleClass="rotulo-campo"/>
+
+                <TextField fx:id="campoNome"
+                           promptText="Nome completo"
+                           prefHeight="40"/>
+
+                <Label text="CPF"
+                       styleClass="rotulo-campo"/>
+
+                <TextField fx:id="campoCpf"
+                           promptText="Opcional"
+                           prefHeight="40"/>
+
+                <Label text="Telefone"
+                       styleClass="rotulo-campo"/>
+
+                <TextField fx:id="campoTelefone"
+                           promptText="Opcional"
+                           prefHeight="40"/>
+
+                <Label text="E-mail"
+                       styleClass="rotulo-campo"/>
+
+                <TextField fx:id="campoEmail"
+                           promptText="Opcional"
+                           prefHeight="40"/>
+
+                <CheckBox fx:id="checkAtivo"
+                          text="Cliente ativo"
+                          selected="true"/>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <HBox spacing="10">
+
+                    <Button fx:id="botaoCancelar"
+                            text="CANCELAR"
+                            prefWidth="120"
+                            prefHeight="42"
+                            styleClass="botao-secundario"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Button fx:id="botaoSalvar"
+                            text="SALVAR CLIENTE"
+                            prefWidth="170"
+                            prefHeight="42"
+                            onAction="#aoSalvarCliente"
+                            styleClass="botao-principal"/>
+
+                </HBox>
+
+            </VBox>
+
+        </HBox>
+
+    </center>
+
+</BorderPane>

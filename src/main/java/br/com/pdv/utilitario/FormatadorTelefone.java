@@ -1,0 +1,233 @@
+package br.com.pdv.utilitario;
+
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
+public class FormatadorTelefone {
+
+    private static final String CHAVE_DIGITOS =
+            "telefoneDigitos";
+
+    private static final int TAMANHO_MAXIMO =
+            11;
+
+    private FormatadorTelefone() {
+    }
+
+    public static void aplicarMascara(
+            TextField campo
+    ) {
+
+        campo.getProperties().put(
+                CHAVE_DIGITOS,
+                ""
+        );
+
+        campo.addEventFilter(
+                KeyEvent.KEY_TYPED,
+                evento -> {
+
+                    String caractere =
+                            evento.getCharacter();
+
+                    if (
+                            caractere != null
+                                    && caractere.matches("\\d")
+                    ) {
+
+                        evento.consume();
+
+                        String digitos =
+                                obterDigitosInternos(
+                                        campo
+                                );
+
+                        if (
+                                digitos.length()
+                                        < TAMANHO_MAXIMO
+                        ) {
+
+                            digitos += caractere;
+
+                            atualizarCampo(
+                                    campo,
+                                    digitos
+                            );
+                        }
+
+                    } else {
+
+                        evento.consume();
+                    }
+                }
+        );
+
+        campo.addEventFilter(
+                KeyEvent.KEY_PRESSED,
+                evento -> {
+
+                    if (
+                            evento.getCode()
+                                    == KeyCode.BACK_SPACE
+                                    || evento.getCode()
+                                    == KeyCode.DELETE
+                    ) {
+
+                        evento.consume();
+
+                        String digitos =
+                                obterDigitosInternos(
+                                        campo
+                                );
+
+                        if (!digitos.isEmpty()) {
+
+                            digitos =
+                                    digitos.substring(
+                                            0,
+                                            digitos.length() - 1
+                                    );
+                        }
+
+                        atualizarCampo(
+                                campo,
+                                digitos
+                        );
+                    }
+                }
+        );
+    }
+
+    public static void definirValor(
+            TextField campo,
+            String telefone
+    ) {
+
+        String digitos =
+                somenteNumeros(
+                        telefone
+                );
+
+        if (
+                digitos.length()
+                        > TAMANHO_MAXIMO
+        ) {
+
+            digitos =
+                    digitos.substring(
+                            0,
+                            TAMANHO_MAXIMO
+                    );
+        }
+
+        atualizarCampo(
+                campo,
+                digitos
+        );
+    }
+
+    public static String obterSomenteNumeros(
+            TextField campo
+    ) {
+
+        return obterDigitosInternos(
+                campo
+        );
+    }
+
+    private static String obterDigitosInternos(
+            TextField campo
+    ) {
+
+        Object valor =
+                campo
+                        .getProperties()
+                        .get(CHAVE_DIGITOS);
+
+        if (valor instanceof String) {
+
+            return (String) valor;
+        }
+
+        return "";
+    }
+
+    private static void atualizarCampo(
+            TextField campo,
+            String digitos
+    ) {
+
+        campo.getProperties().put(
+                CHAVE_DIGITOS,
+                digitos
+        );
+
+        campo.setText(
+                formatar(
+                        digitos
+                )
+        );
+
+        campo.positionCaret(
+                campo.getText().length()
+        );
+    }
+
+    private static String formatar(
+            String digitos
+    ) {
+
+        int tamanho =
+                digitos.length();
+
+        if (tamanho == 0) {
+            return "";
+        }
+
+        if (tamanho <= 2) {
+
+            return "("
+                    + digitos;
+        }
+
+        if (tamanho <= 6) {
+
+            return "("
+                    + digitos.substring(0, 2)
+                    + ") "
+                    + digitos.substring(2);
+        }
+
+        if (tamanho <= 10) {
+
+            return "("
+                    + digitos.substring(0, 2)
+                    + ") "
+                    + digitos.substring(2, 6)
+                    + "-"
+                    + digitos.substring(6);
+        }
+
+        return "("
+                + digitos.substring(0, 2)
+                + ") "
+                + digitos.substring(2, 7)
+                + "-"
+                + digitos.substring(7);
+    }
+
+    private static String somenteNumeros(
+            String valor
+    ) {
+
+        if (valor == null) {
+            return "";
+        }
+
+        return valor.replaceAll(
+                "\\D",
+                ""
+        );
+    }
+}

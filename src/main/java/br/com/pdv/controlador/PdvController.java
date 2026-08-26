@@ -113,6 +113,19 @@ public class PdvController {
                                     aoAlterarQuantidade();
 
                                 } else if (
+                                        evento.getCode() == KeyCode.F5
+                                ) {
+
+                                    evento.consume();
+
+                                    aoAbrirClientes();
+
+                                } else if (
+                                        evento.getCode() == KeyCode.DELETE
+                                                && tabelaItens.isFocused()
+                                ) {
+
+                                } else if (
                                         evento.getCode() == KeyCode.DELETE
                                                 && tabelaItens.isFocused()
                                 ) {
@@ -706,6 +719,77 @@ public class PdvController {
                     Alert.AlertType.ERROR,
                     "Erro no sistema",
                     "Não foi possível abrir a tela de produtos."
+            );
+        }
+    }
+
+    private void aoAbrirClientes() {
+
+        try {
+
+            var recurso =
+                    getClass().getResource(
+                            "/fxml/clientes.fxml"
+                    );
+
+            if (recurso == null) {
+
+                exibirAlerta(
+                        Alert.AlertType.ERROR,
+                        "Arquivo não encontrado",
+                        "Não foi possível localizar clientes.fxml."
+                );
+
+                return;
+            }
+
+            FXMLLoader carregador =
+                    new FXMLLoader(recurso);
+
+            Scene cenaClientes =
+                    new Scene(
+                            carregador.load()
+                    );
+
+            Stage janelaClientes =
+                    new Stage();
+
+            janelaClientes.setTitle(
+                    "Le Café | Cafeteria Premium - Clientes"
+            );
+
+            janelaClientes.setScene(
+                    cenaClientes
+            );
+
+            janelaClientes.initOwner(
+                    tabelaItens
+                            .getScene()
+                            .getWindow()
+            );
+
+            janelaClientes.initModality(
+                    Modality.WINDOW_MODAL
+            );
+
+            janelaClientes.setResizable(
+                    false
+            );
+
+            janelaClientes.centerOnScreen();
+
+            janelaClientes.showAndWait();
+
+            campoCodigo.requestFocus();
+
+        } catch (IOException erro) {
+
+            erro.printStackTrace();
+
+            exibirAlerta(
+                    Alert.AlertType.ERROR,
+                    "Erro no sistema",
+                    "Não foi possível abrir a tela de clientes."
             );
         }
     }
