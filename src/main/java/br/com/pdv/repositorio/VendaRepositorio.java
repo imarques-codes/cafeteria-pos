@@ -1,5 +1,10 @@
 package br.com.pdv.repositorio;
 
+import br.com.pdv.dominio.ResumoVenda;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import br.com.pdv.dominio.ItemVenda;
 import br.com.pdv.dominio.PagamentoVenda;
 import br.com.pdv.dominio.Venda;
@@ -246,7 +251,89 @@ public class VendaRepositorio {
 
             conexao.close();
         }
-    }    private void baixarEstoque(
+        }
+        public List<ResumoVenda> listarVendas()
+        throws SQLException {
+
+            // Aqui eu busco somente os dados que preciso para montar a tela de histórico.
+            String sql = """
+            SELECT
+                v.id,
+                v.data_hora,
+                v.total_centavos,
+                v.status,
+                u.nome AS nome_operador
+            FROM venda v
+            INNER JOIN usuario u
+                ON u.id = v.usuario_id
+            ORDER BY
+                v.data_hora DESC,
+                v.id DESC;
+            """;
+
+            List<ResumoVenda> vendas =
+                    new ArrayList<>();
+
+            DateTimeFormatter formatoDataHora =
+                    DateTimeFormatter.ofPattern(
+                            "yyyy-MM-dd HH:mm:ss"
+                    );
+
+            try (
+                    Connection conexao =
+                            ConexaoBanco.conectar();
+
+                    PreparedStatement comando =
+                            conexao.prepareStatement(sql);
+
+                    ResultSet resultado =
+                            comando.executeQuery()
+            ) {
+
+                while (resultado.next()) {
+
+                    ResumoVenda venda =
+                            new ResumoVenda();
+
+                    venda.setId(
+                            resultado.getInt("id")
+                    );
+
+                    venda.setDataHora(
+                            LocalDateTime.parse(
+                                    resultado.getString(
+                                            "data_hora"
+                                    ),
+                                    formatoDataHora
+                            )
+                    );
+
+                    venda.setTotalCentavos(
+                            resultado.getLong(
+                                    "total_centavos"
+                            )
+                    );
+
+                    venda.setStatus(
+                            resultado.getString(
+                                    "status"
+                            )
+                    );
+
+                    venda.setNomeOperador(
+                            resultado.getString(
+                                    "nome_operador"
+                            )
+                    );
+
+                    vendas.add(venda);
+                }
+            }
+
+            return vendas;
+        }
+
+        private void baixarEstoque(
             Connection conexao,
             Venda venda
     ) throws SQLException {

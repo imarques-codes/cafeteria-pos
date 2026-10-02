@@ -187,8 +187,7 @@ public class FormatadorMoeda {
                 campo.getText().length()
         );
     }
-
-    private static String formatarCentavos(
+    public static String formatarCentavos(
             long centavos
     ) {
 

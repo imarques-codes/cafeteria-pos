@@ -7,7 +7,7 @@ import br.com.pdv.dominio.SessaoCaixa;
 import br.com.pdv.dominio.Usuario;
 import br.com.pdv.dominio.Venda;
 import br.com.pdv.repositorio.VendaRepositorio;
-
+import br.com.pdv.dominio.ResumoVenda;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -23,6 +23,13 @@ public class ServicoVenda {
 
         this.servicoCaixa =
                 new ServicoCaixa();
+
+        public List<ResumoVenda> listarVendas()
+        throws SQLException {
+
+            // Aqui eu deixo o serviço responsável por buscar o histórico sem acessar o banco diretamente pela tela.
+            return vendaRepositorio.listarVendas();
+        }
     }
 
     public Venda finalizarVenda(

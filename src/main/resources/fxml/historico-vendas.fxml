@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.pdv.controlador.HistoricoVendasController"
+            prefWidth="900"
+            prefHeight="600">
+
+    <top>
+
+        <VBox spacing="6">
+
+            <padding>
+                <Insets top="24"
+                        right="30"
+                        bottom="18"
+                        left="30"/>
+            </padding>
+
+            <Label text="HISTÓRICO DE VENDAS"/>
+
+            <Label text="Consulte as vendas registradas no sistema."/>
+
+        </VBox>
+
+    </top>
+
+    <center>
+
+        <VBox spacing="12">
+
+            <padding>
+                <Insets right="30"
+                        bottom="20"
+                        left="30"/>
+            </padding>
+
+            <TableView fx:id="tabelaVendas"
+                       VBox.vgrow="ALWAYS">
+
+                <columns>
+
+                    <TableColumn fx:id="colunaId"
+                                 text="Venda"
+                                 prefWidth="90"/>
+
+                    <TableColumn fx:id="colunaDataHora"
+                                 text="Data / Hora"
+                                 prefWidth="190"/>
+
+                    <TableColumn fx:id="colunaOperador"
+                                 text="Operador"
+                                 prefWidth="220"/>
+
+                    <TableColumn fx:id="colunaTotal"
+                                 text="Total"
+                                 prefWidth="160"/>
+
+                    <TableColumn fx:id="colunaStatus"
+                                 text="Status"
+                                 prefWidth="150"/>
+
+                </columns>
+
+            </TableView>
+
+        </VBox>
+
+    </center>
+
+    <bottom>
+
+        <HBox alignment="CENTER_RIGHT">
+
+            <padding>
+                <Insets top="10"
+                        right="30"
+                        bottom="20"
+                        left="30"/>
+            </padding>
+
+            <Button text="FECHAR"
+                    onAction="#aoFechar"
+                    prefWidth="120"
+                    prefHeight="38"/>
+
+        </HBox>
+
+    </bottom>
+
+</BorderPane>
