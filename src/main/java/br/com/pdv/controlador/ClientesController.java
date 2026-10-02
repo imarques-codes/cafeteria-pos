@@ -418,7 +418,7 @@ public class ClientesController {
                 new Alert(tipo);
 
         alerta.setTitle(
-                "Le Café | Clientes"
+                "Clientes"
         );
 
         alerta.setHeaderText(

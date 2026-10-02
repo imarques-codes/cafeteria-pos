@@ -408,7 +408,7 @@ public class PagamentoController {
                 new Alert(tipo);
 
         alerta.setTitle(
-                "Le Café | PDV"
+                "PDV "
         );
 
         alerta.setHeaderText(

@@ -35,15 +35,6 @@
                         left="20"/>
             </padding>
 
-            <ImageView fitWidth="70"
-                       fitHeight="55"
-                       preserveRatio="true">
-
-                <image>
-                    <Image url="@../imagens/logo-le-cafe.png"/>
-                </image>
-
-            </ImageView>
 
             <VBox spacing="2">
 

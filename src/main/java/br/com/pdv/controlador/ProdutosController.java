@@ -557,7 +557,7 @@ public class ProdutosController {
                 new Alert(tipo);
 
         alerta.setTitle(
-                "Le Café | Produtos"
+                "Produtos"
         );
 
         alerta.setHeaderText(

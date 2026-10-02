@@ -424,7 +424,7 @@ public class PdvController {
                 );
 
         dialogo.setTitle(
-                "Le Café | PDV"
+                "PDV "
         );
 
         dialogo.setHeaderText(
@@ -538,7 +538,7 @@ public class PdvController {
                 new TextInputDialog("1");
 
         dialogo.setTitle(
-                "Le Café | PDV"
+                "PDV "
         );
 
         dialogo.setHeaderText(
@@ -684,7 +684,7 @@ public class PdvController {
                     new Stage();
 
             janelaProdutos.setTitle(
-                    "Le Café | Cafeteria Premium - Produtos"
+                    "Gerenciamento de Produtos"
             );
 
             janelaProdutos.setScene(
@@ -755,7 +755,7 @@ public class PdvController {
                     new Stage();
 
             janelaClientes.setTitle(
-                    "Le Café | Cafeteria Premium - Clientes"
+                    "Gerenciamento de Clientes"
             );
 
             janelaClientes.setScene(
@@ -847,7 +847,7 @@ public class PdvController {
                     new Stage();
 
             janelaPagamento.setTitle(
-                    "Le Café | Cafeteria Premium - Pagamento"
+                    "Pagamento"
             );
 
             janelaPagamento.setScene(
@@ -944,7 +944,7 @@ public class PdvController {
                                     .getWindow();
 
             janela.setTitle(
-                    "Le Café | Cafeteria Premium - Fechamento de Caixa"
+                    "PDV - Fechamento de caixa"
             );
 
             janela.setScene(cenaFechamento);
@@ -991,7 +991,7 @@ public class PdvController {
                 new Alert(tipo);
 
         alerta.setTitle(
-                "Le Café | PDV"
+                "PDV "
         );
 
         alerta.setHeaderText(titulo);

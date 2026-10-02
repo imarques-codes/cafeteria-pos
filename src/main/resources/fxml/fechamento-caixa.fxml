@@ -30,17 +30,6 @@
                         left="35"/>
             </padding>
 
-            <ImageView fitWidth="130"
-                       fitHeight="100"
-                       preserveRatio="true"
-                       smooth="true">
-
-                <image>
-                    <Image url="@../imagens/logo-le-cafe.png"/>
-                </image>
-
-            </ImageView>
-
             <Label text="FECHAMENTO DE CAIXA"
                    styleClass="titulo-fechamento"/>
 
@@ -55,7 +44,7 @@
                        styleClass="rotulo-campo"/>
 
                 <Label fx:id="rotuloOperador"
-                       text="Administrador Le Café"
+                       text="Administrador"
                        styleClass="informacao-operador"/>
 
             </VBox>
@@ -92,9 +81,6 @@
                     defaultButton="true"
                     styleClass="botao-fechar"
                     onAction="#aoFecharCaixa"/>
-
-            <Label text="Le Café | Cafeteria Premium"
-                   styleClass="rodape"/>
 
         </VBox>
 

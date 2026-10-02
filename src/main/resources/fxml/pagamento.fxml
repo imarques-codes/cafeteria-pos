@@ -34,15 +34,6 @@
                         left="35"/>
             </padding>
 
-            <ImageView fitWidth="120"
-                       fitHeight="85"
-                       preserveRatio="true"
-                       smooth="true">
-                <image>
-                    <Image url="@../imagens/logo-le-cafe.png"/>
-                </image>
-            </ImageView>
-
             <Label text="FINALIZAR VENDA"
                    styleClass="titulo-pagamento"/>
 
@@ -149,9 +140,6 @@
                         styleClass="botao-confirmar"/>
 
             </HBox>
-
-            <Label text="Le Café | Cafeteria Premium"
-                   styleClass="rodape"/>
 
         </VBox>
 

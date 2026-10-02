@@ -20,15 +20,6 @@
               spacing="22"
               styleClass="cartao-carregamento">
 
-            <ImageView fitWidth="180"
-                       preserveRatio="true">
-
-                <image>
-                    <Image url="@../imagens/logo-le-cafe.png"/>
-                </image>
-
-            </ImageView>
-
             <Label text="Carregando sistema... aguarde"
                    styleClass="titulo-carregamento"/>
 
@@ -44,17 +35,8 @@
             <HBox alignment="CENTER"
                   spacing="8">
 
-                <Label text="Desenvolvido por"
+                <Label text="Desenvolvido por Igor Marques"
                        styleClass="fabricante"/>
-
-                <ImageView fitWidth="90"
-                           preserveRatio="true">
-
-                    <image>
-                        <Image url="@../imagens/logo-datacore.png"/>
-                    </image>
-
-                </ImageView>
 
             </HBox>
 

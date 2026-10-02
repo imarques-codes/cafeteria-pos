@@ -25,7 +25,7 @@ public class Main extends Application {
 
         Scene cena = new Scene(carregador.load());
 
-        janelaPrincipal.setTitle("Le Café | Cafeteria Premium - Login");
+        janelaPrincipal.setTitle("PDV - Login");
         janelaPrincipal.setScene(cena);
         janelaPrincipal.show();
     }

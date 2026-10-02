@@ -184,7 +184,7 @@ public class LoginController {
                                     .getWindow();
 
             janelaPrincipal.setTitle(
-                    "Le Café | Cafeteria Premium - Carregando"
+                    "PDV - Carregando"
             );
 
             janelaPrincipal.setScene(
@@ -256,7 +256,7 @@ public class LoginController {
                     );
 
             janelaPrincipal.setTitle(
-                    "Le Café | Cafeteria Premium - Abertura de Caixa"
+                    "PDV - Abertura de Caixa"
             );
 
             janelaPrincipal.setScene(
@@ -294,7 +294,7 @@ public class LoginController {
                     );
 
             janelaPrincipal.setTitle(
-                    "Le Café | Cafeteria Premium - PDV"
+                    "PDV "
             );
 
             janelaPrincipal.setScene(
@@ -325,7 +325,7 @@ public class LoginController {
                 new Alert(tipo);
 
         alerta.setTitle(
-                "Le Café | PDV"
+                "PDV "
         );
 
         alerta.setHeaderText(

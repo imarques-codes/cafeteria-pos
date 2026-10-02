@@ -148,7 +148,7 @@ public class AberturaCaixaController {
                                 .getWindow();
 
         janela.setTitle(
-                "Le Café | Cafeteria Premium - PDV"
+                "PDV "
         );
 
         janela.setScene(cenaPdv);
@@ -165,7 +165,7 @@ public class AberturaCaixaController {
                 new Alert(tipo);
 
         alerta.setTitle(
-                "Le Café | PDV"
+                "PDV "
         );
 
         alerta.setHeaderText(titulo);

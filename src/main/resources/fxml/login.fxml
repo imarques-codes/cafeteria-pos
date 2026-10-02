@@ -6,8 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
@@ -36,24 +34,6 @@
                         bottom="30"
                         left="40"/>
             </padding>
-
-            <!-- LOGO DA CAFETERIA -->
-
-            <ImageView fitWidth="220"
-                       fitHeight="150"
-                       preserveRatio="true">
-
-                <image>
-                    <Image url="@../imagens/logo-le-cafe.png"/>
-                </image>
-
-            </ImageView>
-
-            <Label text="Le Café"
-                   styleClass="nome-cafeteria"/>
-
-            <Label text="Cafeteria Premium"
-                   styleClass="subtitulo-cafeteria"/>
 
             <Region prefHeight="15"/>
 
@@ -120,16 +100,8 @@
                 <Label text="Desenvolvido por"
                        styleClass="fabricante"/>
 
-                <ImageView fitWidth="110"
-                            fitHeight="40"
-                            preserveRatio="true"
-                            smooth="true">
-
-                    <image>
-                        <Image url="@../imagens/logo-datacore.png"/>
-                    </image>
-
-                </ImageView>
+                <Label text="Igor Marques"
+                       styleClass="credito-desenvolvedor"/>
 
             </HBox>
 

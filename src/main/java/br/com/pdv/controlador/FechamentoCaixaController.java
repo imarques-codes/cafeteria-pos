@@ -152,7 +152,7 @@ public class FechamentoCaixaController {
                                 .getWindow();
 
         janela.setTitle(
-                "Le Café | Cafeteria Premium - Login"
+                "PDV - Login"
         );
 
         janela.setScene(cenaLogin);
@@ -169,7 +169,7 @@ public class FechamentoCaixaController {
                 new Alert(tipo);
 
         alerta.setTitle(
-                "Le Café | PDV"
+                "PDV "
         );
 
         alerta.setHeaderText(titulo);

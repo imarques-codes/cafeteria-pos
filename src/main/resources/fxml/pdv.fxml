@@ -13,8 +13,6 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.Button?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
@@ -33,23 +31,8 @@
         <HBox styleClass="cabecalho"
               alignment="CENTER_LEFT">
 
-            <ImageView fitHeight="78"
-                       preserveRatio="true">
-
-                <image>
-                    <Image url="@../imagens/logo-le-cafe.png"/>
-                </image>
-
-            </ImageView>
-
             <VBox spacing="2"
                   alignment="CENTER_LEFT">
-
-                <Label text="Le Café"
-                       styleClass="titulo-sistema"/>
-
-                <Label text="Cafeteria Premium"
-                       styleClass="subtitulo-sistema"/>
 
                 <Label text="PDV"
                        styleClass="identificacao-pdv"/>
@@ -109,16 +92,6 @@
 
                 <StackPane styleClass="area-logotipo"
                            prefHeight="230">
-
-                    <ImageView fitWidth="250"
-                               fitHeight="210"
-                               preserveRatio="true">
-
-                        <image>
-                            <Image url="@../imagens/logo-le-cafe.png"/>
-                        </image>
-
-                    </ImageView>
 
                 </StackPane>
 
