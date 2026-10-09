@@ -24,13 +24,15 @@ public class ServicoVenda {
         this.servicoCaixa =
                 new ServicoCaixa();
 
+    }
+
         public List<ResumoVenda> listarVendas()
         throws SQLException {
 
             // Aqui eu deixo o serviço responsável por buscar o histórico sem acessar o banco diretamente pela tela.
             return vendaRepositorio.listarVendas();
         }
-    }
+
 
     public Venda finalizarVenda(
             List<ItemVenda> itens,
